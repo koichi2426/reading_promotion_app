@@ -45,12 +45,8 @@ void main() {
                   },
                   child: Text('Button 2'),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Action for the third button
-                  },
-                  child: Text('Button 3'),
-                ),
+                
+                ReadComponent(), // ReadComponent instead of Button 3
               ],
             ),
           ],
