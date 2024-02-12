@@ -14,11 +14,12 @@ class ReadComponent extends StatelessWidget {
           builder: (BuildContext context) {
             // ダイアログの内容をここに書く
             return Dialog(
+              backgroundColor: Color(0xFFD2B48C), // 薄い茶色の背景色
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
               child: Container(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(20.0),
                 height: 150.0,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -26,8 +27,8 @@ class ReadComponent extends StatelessWidget {
                     // Kindleボタン
                     BarcodeComponent(),
                     // バーコードボタン
-                    KindleComponent()
-                    ],
+                    KindleComponent(),
+                  ],
                 ),
               ),
             );

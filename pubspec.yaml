@@ -11,12 +11,8 @@ dependencies:
     sdk: flutter
   provider:
   cupertino_icons: ^1.0.6
-  firebase_core: ^2.25.3
-  firebase_analytics:
-  firebase_auth:
   google_sign_in:
   device_preview:
-  cloud_firestore:
   http: ^1.2.0
   simple_barcode_scanner: ^0.0.8
   awesome_dialog: ^3.2.0
@@ -33,16 +29,18 @@ dependencies:
   web_socket_channel:
   envied:
   shared_preferences:
+  firebase_core: ^2.25.4
+  cloud_firestore:
 
 dev_dependencies:
   freezed:
   riverpod_generator:
-  build_runner:
   json_serializable:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  envied_generator:
+  build_runner: ^2.4.8
+  envied_generator: ^0.5.3
 
 flutter:
   assets:
