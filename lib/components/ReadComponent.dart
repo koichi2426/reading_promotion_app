@@ -12,9 +12,8 @@ class ReadComponent extends StatelessWidget {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            // ダイアログの内容をここに書く
             return Dialog(
-              backgroundColor: Color(0xFFD2B48C), // 薄い茶色の背景色
+              backgroundColor: Color(0xFFD2B48C),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
@@ -24,9 +23,7 @@ class ReadComponent extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    // Kindleボタン
                     BarcodeComponent(),
-                    // バーコードボタン
                     KindleComponent(),
                   ],
                 ),
@@ -35,17 +32,34 @@ class ReadComponent extends StatelessWidget {
           },
         );
       },
-      child: FittedBox(
-        fit: BoxFit.fill,
-        child: Image.asset(
-          'assets/images/add_button.png',
-          width: 200, // 横幅を100ピクセルに設定
-          height: 200, // 高さを100ピクセルに設定
+      child: Ink(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 4,
+              blurRadius: 10,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: AssetImage('assets/images/add_button.png'),
+            fit: BoxFit.cover,
           ),
-      ), // ボタンのテキスト
+        ),
+        child: Container(
+          width: 200,
+          height: 200,
+          alignment: Alignment.center,
+        ),
+      ),
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),
-        padding: EdgeInsets.all(0),
+        padding: EdgeInsets.zero,
+        primary: Colors.transparent, // ボタンの背景色を透明に設定
+        onSurface: Colors.transparent,
+        shadowColor: Colors.transparent, // ボタンの影を透明に設定
       ),
     );
   }
