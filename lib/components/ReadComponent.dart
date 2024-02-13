@@ -34,7 +34,7 @@ class ReadComponent extends StatelessWidget {
       },
       child: Ink(
         decoration: BoxDecoration(
-          boxShadow: [
+      boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
               spreadRadius: 4,
@@ -55,9 +55,14 @@ class ReadComponent extends StatelessWidget {
         ),
       ),
       style: ElevatedButton.styleFrom(
-        shape: CircleBorder(),
+        shape: const CircleBorder(
+      side: BorderSide(
+        color: Colors.black,
+        width: 0.5,
+        style: BorderStyle.solid,
+      ),
+    ),
         padding: EdgeInsets.zero,
-        primary: Colors.transparent, // ボタンの背景色を透明に設定
         onSurface: Colors.transparent,
         shadowColor: Colors.transparent, // ボタンの影を透明に設定
       ),
