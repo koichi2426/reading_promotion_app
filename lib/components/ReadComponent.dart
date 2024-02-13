@@ -35,7 +35,18 @@ class ReadComponent extends StatelessWidget {
           },
         );
       },
-      child: Text('Read'), // ボタンのテキスト
+      child: FittedBox(
+        fit: BoxFit.fill,
+        child: Image.asset(
+          'assets/images/add_button.png',
+          width: 200, // 横幅を100ピクセルに設定
+          height: 200, // 高さを100ピクセルに設定
+          ),
+      ), // ボタンのテキスト
+      style: ElevatedButton.styleFrom(
+        shape: CircleBorder(),
+        padding: EdgeInsets.all(0),
+      ),
     );
   }
 }
