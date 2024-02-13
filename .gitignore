@@ -44,7 +44,7 @@ app.*.map.json
 
 #.env
 *.env
-*env.g.dart
+/lib/relatedBookData/env.g.dart
 
 #firebase
 firebase_options*.dart
