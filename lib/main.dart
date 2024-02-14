@@ -58,22 +58,112 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Button 1'),
+                Container(
+                  margin: EdgeInsets.only(top: 80.0, left: 30),
+                  child: GestureDetector(
+                    onTap: () {
+                      //キャラクター図鑑を表示する chip chip chapa chapa
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16.0), // パディングを追加
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 227, 197, 155),
+                        borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1.0,
+                        ),
+                      ),
+                      child: Image.asset(
+                        'assets/images/graduate_button.png',
+                        width: 40, // 画像の幅
+                        height: 40, // 画像の高さ
+                      ),
+                    ),
+                  ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => pictureBookPage()),
-                    );
-                  },
-                  child: Text('Button 2'),
+                SizedBox(width: 40.0), // ボタン1とボタン2の間に余白を追加
+                Container(
+                  margin: EdgeInsets.only(top: 80.0, right: 25),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => pictureBookPage()),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16.0), // パディングを追加
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 227, 197, 155),
+                        borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1.0,
+                        ),
+                      ),
+                      child: Image.asset(
+                        'assets/images/pictureBook.png',
+                        width: 40, // 画像の幅
+                        height: 40, // 画像の高さ
+                      ),
+                    ),
+                  ),
                 ),
 
-                ReadComponent(), // ReadComponent instead of Button 3
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            backgroundColor: Color(0xFFD2B48C),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Container(
+                              padding: EdgeInsets.all(20.0),
+                              height: 150.0,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  BarcodeComponent(),
+                                  KindleComponent(),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Ink(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            spreadRadius: 4,
+                            blurRadius: 10,
+                            offset: Offset(0, 3), // 影の位置を変更
+                          ),
+                        ],
+                        shape: BoxShape.circle,
+                      ),
+                      child: Align(
+                        alignment: Alignment.centerRight, // 右寄せ
+                        child: Image.asset(
+                          'assets/images/add_button.png',
+                          width: 140, // 画像の幅を半分にする
+                          height: 140, // 画像の高さを半分にする
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ],
