@@ -5,16 +5,13 @@ class CharacterDisplayWidget extends StatelessWidget {
   final String headPartImagePath;
   final String bodyPartImagePath;
   final String legPartImagePath;
-  final double headPositionX; // 頭部のX座標位置
-  final double headPositionY; // 頭部のY座標位置
+  final Alignment headAlignment; // 頭部の位置Alignment
   final double headWidth; // 頭部の幅
   final double headHeight; // 頭部の高さ
-  final double bodyPositionX; // 胴体のX座標位置
-  final double bodyPositionY; // 胴体のY座標位置
+  final Alignment bodyAlignment; // 胴体の位置Alignment
   final double bodyWidth; // 胴体の幅
   final double bodyHeight; // 胴体の高さ
-  final double legPositionX; // 足部のX座標位置
-  final double legPositionY; // 足部のY座標位置
+  final Alignment legAlignment; // 足部の位置Alignment
   final double legWidth; // 足部の幅
   final double legHeight; // 足部の高さ
 
@@ -24,16 +21,13 @@ class CharacterDisplayWidget extends StatelessWidget {
     required this.headPartImagePath,
     required this.bodyPartImagePath,
     required this.legPartImagePath,
-    this.headPositionX = 0,
-    this.headPositionY = 0,
+    this.headAlignment = const Alignment(0.5, 0.5),
     this.headWidth = 500, // デフォルト値を設定
     this.headHeight = 500, // デフォルト値を設定
-    this.bodyPositionX = 0,
-    this.bodyPositionY = 0,
+    this.bodyAlignment = const Alignment(0.5, 0.5),
     this.bodyWidth = 500, // デフォルト値を設定
     this.bodyHeight = 500, // デフォルト値を設定
-    this.legPositionX = 0,
-    this.legPositionY = 0,
+    this.legAlignment = const Alignment(0.5, 0.5),
     this.legWidth = 500, // デフォルト値を設定
     this.legHeight = 500, // デフォルト値を設定
   }) : super(key: key);
@@ -58,8 +52,8 @@ class CharacterDisplayWidget extends StatelessWidget {
               height: stackHeight,
             ),
             Positioned(
-              left: headPositionX,
-              top: headPositionY,
+              left: stackWidth * headAlignment.x - headWidth / 2,
+              top: stackHeight * headAlignment.y - headHeight / 2,
               child: Image.asset(
                 headPartImagePath,
                 width: headWidth,
@@ -67,8 +61,8 @@ class CharacterDisplayWidget extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: bodyPositionX,
-              top: bodyPositionY,
+              left: stackWidth * bodyAlignment.x - bodyWidth / 2,
+              top: stackHeight * bodyAlignment.y - bodyHeight / 2,
               child: Image.asset(
                 bodyPartImagePath,
                 width: bodyWidth,
@@ -76,8 +70,8 @@ class CharacterDisplayWidget extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: legPositionX,
-              top: legPositionY,
+              left: stackWidth * legAlignment.x - legWidth / 2,
+              top: stackHeight * legAlignment.y - legHeight / 2,
               child: Image.asset(
                 legPartImagePath,
                 width: legWidth,
