@@ -5,34 +5,60 @@ class CharacterDisplayWidget extends StatelessWidget {
   final String headPartImagePath;
   final String bodyPartImagePath;
   final String legPartImagePath;
+  final double headPositionX; // 頭部のX座標位置
+  final double headPositionY; // 頭部のY座標位置
+  final double bodyPositionX; // 胴体のX座標位置
+  final double bodyPositionY; // 胴体のY座標位置
+  final double legPositionX; // 足部のX座標位置
+  final double legPositionY; // 足部のY座標位置
 
   const CharacterDisplayWidget({
     Key? key,
-    required this.characterImagePath, // コンストラクタに追加
+    required this.characterImagePath,
     required this.headPartImagePath,
     required this.bodyPartImagePath,
     required this.legPartImagePath,
+    this.headPositionX = 0,
+    this.headPositionY = 0,
+    this.bodyPositionX = 0,
+    this.bodyPositionY = 0,
+    this.legPositionX = 0,
+    this.legPositionY = 0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        Image.asset(characterImagePath), // キャラクターの基本画像
-        Positioned(
-          top: MediaQuery.of(context).size.height * 0.1, // 頭部パーツの位置調整
-          child: Image.asset(headPartImagePath),
-        ),
-        Positioned(
-          // 胴体パーツの位置調整、必要に応じて調整してください
-          child: Image.asset(bodyPartImagePath),
-        ),
-        Positioned(
-          bottom: MediaQuery.of(context).size.height * 0.1, // 足部パーツの位置調整
-          child: Image.asset(legPartImagePath),
-        ),
-      ],
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        // LayoutBuilderを使用してStackの最大サイズを取得
+        final stackWidth = constraints.maxWidth;
+        final stackHeight = constraints.maxHeight;
+
+        // コンソールにStackのサイズを表示
+        print('Stack Size: width=$stackWidth, height=$stackHeight');
+
+        return Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Image.asset(characterImagePath),
+            Positioned(
+              left: headPositionX,
+              top: headPositionY,
+              child: Image.asset(headPartImagePath),
+            ),
+            Positioned(
+              left: bodyPositionX,
+              top: bodyPositionY,
+              child: Image.asset(bodyPartImagePath),
+            ),
+            Positioned(
+              left: legPositionX,
+              top: legPositionY,
+              child: Image.asset(legPartImagePath),
+            ),
+          ],
+        );
+      },
     );
   }
 }
