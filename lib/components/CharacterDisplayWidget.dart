@@ -6,14 +6,8 @@ class CharacterDisplayWidget extends StatelessWidget {
   final String bodyPartImagePath;
   final String legPartImagePath;
   final Alignment headAlignment; // 頭部の位置Alignment
-  final double headWidth; // 頭部の幅
-  final double headHeight; // 頭部の高さ
   final Alignment bodyAlignment; // 胴体の位置Alignment
-  final double bodyWidth; // 胴体の幅
-  final double bodyHeight; // 胴体の高さ
   final Alignment legAlignment; // 足部の位置Alignment
-  final double legWidth; // 足部の幅
-  final double legHeight; // 足部の高さ
 
   const CharacterDisplayWidget({
     Key? key,
@@ -22,14 +16,8 @@ class CharacterDisplayWidget extends StatelessWidget {
     required this.bodyPartImagePath,
     required this.legPartImagePath,
     this.headAlignment = const Alignment(0.5, 0.5),
-    this.headWidth = 500, // デフォルト値を設定
-    this.headHeight = 500, // デフォルト値を設定
     this.bodyAlignment = const Alignment(0.5, 0.5),
-    this.bodyWidth = 500, // デフォルト値を設定
-    this.bodyHeight = 500, // デフォルト値を設定
     this.legAlignment = const Alignment(0.5, 0.5),
-    this.legWidth = 500, // デフォルト値を設定
-    this.legHeight = 500, // デフォルト値を設定
   }) : super(key: key);
 
   @override
@@ -52,30 +40,30 @@ class CharacterDisplayWidget extends StatelessWidget {
               height: stackHeight,
             ),
             Positioned(
-              left: stackWidth * headAlignment.x - headWidth / 2,
-              top: stackHeight * headAlignment.y - headHeight / 2,
+              left: stackWidth * headAlignment.x - stackWidth / 2,
+              top: stackHeight * headAlignment.y - stackHeight / 2,
               child: Image.asset(
                 headPartImagePath,
-                width: headWidth,
-                height: headHeight,
+                width: stackWidth,
+                height: stackHeight,
               ),
             ),
             Positioned(
-              left: stackWidth * bodyAlignment.x - bodyWidth / 2,
-              top: stackHeight * bodyAlignment.y - bodyHeight / 2,
+              left: stackWidth * bodyAlignment.x - stackWidth / 2,
+              top: stackHeight * bodyAlignment.y - stackHeight / 2,
               child: Image.asset(
                 bodyPartImagePath,
-                width: bodyWidth,
-                height: bodyHeight,
+                width: stackWidth,
+                height: stackHeight,
               ),
             ),
             Positioned(
-              left: stackWidth * legAlignment.x - legWidth / 2,
-              top: stackHeight * legAlignment.y - legHeight / 2,
+              left: stackWidth * legAlignment.x - stackWidth / 2,
+              top: stackHeight * legAlignment.y - stackHeight / 2,
               child: Image.asset(
                 legPartImagePath,
-                width: legWidth,
-                height: legHeight,
+                width: stackWidth,
+                height: stackHeight,
               ),
             ),
           ],
