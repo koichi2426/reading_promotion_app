@@ -12,9 +12,8 @@ class ReadComponent extends StatelessWidget {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            // ダイアログの内容をここに書く
             return Dialog(
-              backgroundColor: Color(0xFFD2B48C), // 薄い茶色の背景色
+              backgroundColor: Color(0xFFD2B48C),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
@@ -24,9 +23,7 @@ class ReadComponent extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    // Kindleボタン
                     BarcodeComponent(),
-                    // バーコードボタン
                     KindleComponent(),
                   ],
                 ),
@@ -35,7 +32,36 @@ class ReadComponent extends StatelessWidget {
           },
         );
       },
-      child: Text('Read'), // ボタンのテキスト
+      child: Ink(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 4,
+              blurRadius: 10,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          shape: BoxShape.circle,
+        ),
+        child: Container(
+          width: 180,
+          height: 180,
+          alignment: Alignment.center,
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        shape: const CircleBorder(
+          side: BorderSide(
+            color: Colors.black,
+            width: 0.5,
+            style: BorderStyle.solid,
+          ),
+        ),
+        padding: EdgeInsets.zero,
+        shadowColor: Colors.transparent,
+        //onSurface: Colors.transparent, // ボタンの影を透明に設定
+      ),
     );
   }
 }

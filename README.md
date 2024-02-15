@@ -1,16 +1,35 @@
-# reading_promotion_app
+## Setup
+1:envをルートディレクトリに配置
 
-A new Flutter project.
+2:env.g.dartをコマンドにより作成
+```
+flutter pub run build_runner build --delete-conflicting-outputs
+```
 
-## Getting Started
+## execution
+実行
 
-This project is a starting point for a Flutter application.
+## pubspec.lockに関するerror
+1:pubspec.lockの消去
+```
+rm pubspec.lock
+```
 
-A few resources to get you started if this is your first Flutter project:
+2:依存関係の再構築
+```
+flutter pub get 
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## その他のerror
+1:pubspec.lockの消去
+```
+flutter clean
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2:依存関係の再構築
+```
+flutter pub get 
+```
+
+
+
