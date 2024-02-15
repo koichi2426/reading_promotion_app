@@ -5,6 +5,6 @@ class CharacterComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('CharacterComponent');
+    return Image.asset('assets/images/character.png'); // assetsフォルダにcharacter.pngが存在することを想定
   }
 }
