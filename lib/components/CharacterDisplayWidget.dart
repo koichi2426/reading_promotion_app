@@ -26,6 +26,32 @@ class CharacterDisplayWidget extends StatelessWidget {
     this.legPartSize = 0.3,
   }) : super(key: key);
 
+  //ジャンル判別処理
+  //頭パーツの位置
+  //胴体パーツの位置
+  //脚パーツの位置
+  //頭パーツのサイズ
+  //胴体パーツのサイズ
+  //脚パーツのサイズ
+  
+
+
+  String extractGenre(String imagePath) {
+    // パスをスラッシュ('/')で分割し、最後の要素を取得
+    List<String> parts = imagePath.split('/');
+    String fileName = parts.last;
+
+    // ファイル名をアンダースコア('_')で分割し、最初の部分を返す
+    List<String> fileNameParts = fileName.split('_');
+    if (fileNameParts.isNotEmpty) {
+      return fileNameParts.first;
+    } else {
+      // アンダースコアで分割できなかった場合は空文字列を返す
+      return '';
+    }
+  }
+  
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -48,7 +74,8 @@ class CharacterDisplayWidget extends StatelessWidget {
           stackChildren.add(
             Positioned(
               left: stackSize * (0.5 + headAlignment.x) - stackSize / 2,
-              top: stackSize * (0.5 + headAlignment.y) - stackSize / 2,
+              top: stackSize
+               * (0.5 + headAlignment.y) - stackSize / 2,
               child: Image.asset(
                 headPartImagePath!,
                 width: stackSize * headPartSize,
