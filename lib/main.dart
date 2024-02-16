@@ -52,7 +52,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Expanded(
               child: Center(
-                child: CharacterComponent(),
+                child: CharacterComponent(
+                  key: UniqueKey(),
+                  genre1:'literature',
+                  genre2:'literature',
+                  genre3:'literature'
+                ),
               ),
             ),
             Row(
