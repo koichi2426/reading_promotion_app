@@ -4,7 +4,7 @@ import 'env.dart';
 
 class ApiService {
   static String _apiText = '';
-
+  
   //gptのapiKey
   final apiKey = Env.key;
 
@@ -23,7 +23,7 @@ class ApiService {
           {
             "role": "user",
             "content":
-                "総記、心理学、歴史、社会、科学医学、技術、産業、芸術、体育、言語、文学、の中で$authorText,$searchTextの本のジャンルを該当するものを1つ選べ。",
+                "総記、心理学、歴史、社会、科学医学、技術、産業、芸術、体育、言語、文学、の中で$authorText,$searchTextの本のジャンルを該当するものを1つ選び、単語で答えよ。",
           },
         ],
       }),
