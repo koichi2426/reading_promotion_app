@@ -36,42 +36,59 @@ class CharacterDisplayWidget extends StatelessWidget {
 
         print('Stack Size: width=$stackSize, height=$stackSize');
 
-        return Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            Image.asset(
-              characterImagePath,
-              width: stackSize, // Use stackSize for both width and height
-              height: stackSize,
-            ),
+        List<Widget> stackChildren = [
+          Image.asset(
+            characterImagePath,
+            width: stackSize,
+            height: stackSize,
+          ),
+        ];
+
+        if (headPartImagePath != 'null') {
+          stackChildren.add(
             Positioned(
               left: stackSize * (0.5 + headAlignment.x) - stackSize / 2,
               top: stackSize * (0.5 + headAlignment.y) - stackSize / 2,
               child: Image.asset(
-                headPartImagePath,
+                headPartImagePath!,
                 width: stackSize * headPartSize,
                 height: stackSize * headPartSize,
               ),
             ),
+          );
+        }
+
+        if (bodyPartImagePath != 'null') {
+          stackChildren.add(
             Positioned(
               left: stackSize * (0.5 + bodyAlignment.x) - stackSize / 2,
               top: stackSize * (0.5 + bodyAlignment.y) - stackSize / 2,
               child: Image.asset(
-                bodyPartImagePath,
+                bodyPartImagePath!,
                 width: stackSize * bodyPartSize,
                 height: stackSize * bodyPartSize,
               ),
             ),
+          );
+        }
+
+        if (legPartImagePath != 'null') {
+          stackChildren.add(
             Positioned(
               left: stackSize * (0.5 + legAlignment.x) - stackSize / 2,
               top: stackSize * (0.5 + legAlignment.y) - stackSize / 2,
               child: Image.asset(
-                legPartImagePath,
+                legPartImagePath!,
                 width: stackSize * legPartSize,
                 height: stackSize * legPartSize,
               ),
             ),
-          ],
+          );
+        }
+
+        return Stack(
+          alignment: Alignment.center,
+          children: stackChildren,
         );
       },
     );
