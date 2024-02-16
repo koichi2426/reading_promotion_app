@@ -11,6 +11,29 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'relatedBookData/pictureBook.dart';
 
+// Firebase Storageからファイルを取得する関数
+Future<List<String>> getFilesFromStorage(String path) async {
+  try {
+    List<String> fileList = [];
+    
+    // 指定されたパス内のファイル一覧を取得
+    Reference ref = FirebaseStorage.instance.ref(path);
+    ListResult result = await ref.listAll();
+    
+    // ファイルのURLをリストに追加
+    result.items.forEach((Reference ref) {
+      fileList.add(ref.fullPath);
+    });
+    
+    return fileList;
+  } catch (e) {
+    // エラーが発生した場合の処理
+    print('Error fetching files from Storage: $e');
+    return [];
+  }
+}
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -51,6 +74,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //storage
+            ElevatedButton(
+              onPressed: () async {
+                List<String> files = await getFilesFromStorage('gs://coriander-app-f5b22.appspot.com/parts'); // ルートからのファイル一覧を取得
+                print('Files in Storage: $files');
+              },
+              child: Text('ファイルを取得'),
+            ),
             Expanded(
               child: Center(
                 child: CharacterComponent(),
