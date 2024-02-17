@@ -1,0 +1,28 @@
+{
+  "genres": {
+    "history": {
+      "headAlignment": {"x": 0.1, "y": -0.3},
+      "bodyAlignment": {"x": 0.5, "y": 0.5},
+      "legAlignment": {"x": 0.5, "y": 0.5},
+      "headPartSize": 0.8,
+      "bodyPartSize": 0.3,
+      "legPartSize": 0.3
+    },
+    "literature": {
+      "headAlignment": {"x": 0.2, "y": -0.2},
+      "bodyAlignment": {"x": 0.5, "y": 0.5},
+      "legAlignment": {"x": 0.5, "y": 0.5},
+      "headPartSize": 0.7,
+      "bodyPartSize": 0.4,
+      "legPartSize": 0.4
+    },
+    "null": {
+      "headAlignment": {"x": 0, "y": 0},
+      "bodyAlignment": {"x": 0, "y": 0},
+      "legAlignment": {"x": 0, "y": 0},
+      "headPartSize": 0,
+      "bodyPartSize": 0,
+      "legPartSize": 0
+    }
+  }
+}
