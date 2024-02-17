@@ -46,4 +46,5 @@ flutter:
   assets:
    - assets/images/
    - assets/images/parts/
+   - assets/parts_adjustment.json
   uses-material-design: true

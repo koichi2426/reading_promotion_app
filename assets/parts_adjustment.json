@@ -17,12 +17,12 @@
       "legPartSize": 0.4
     },
     "null": {
-      "headAlignment": {"x": 0, "y": 0},
-      "bodyAlignment": {"x": 0, "y": 0},
-      "legAlignment": {"x": 0, "y": 0},
-      "headPartSize": 0,
-      "bodyPartSize": 0,
-      "legPartSize": 0
+      "headAlignment": {"x": 0.1, "y": 0.1},
+      "bodyAlignment": {"x": 0.1, "y": 0.1},
+      "legAlignment": {"x": 0.1, "y": 0.1},
+      "headPartSize": 0.0,
+      "bodyPartSize": 0.0,
+      "legPartSize": 0.0
     }
   }
 }
