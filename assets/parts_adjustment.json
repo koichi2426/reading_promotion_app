@@ -1,6 +1,6 @@
 {
   "genres": {
-    "Generalities": {
+    "generalities": {
       "headAlignment": {"x": 0.1, "y": -0.3},
       "bodyAlignment": {"x": 0.5, "y": 0.5},
       "legAlignment": {"x": 0.5, "y": 0.5},
@@ -8,7 +8,7 @@
       "bodyPartSize": 0.3,
       "legPartSize": 0.3
     },
-    "Philosophy-Psychology": {
+    "philosophy-psychology": {
       "headAlignment": {"x": 0.2, "y": -0.2},
       "bodyAlignment": {"x": 0.5, "y": 0.5},
       "legAlignment": {"x": 0.5, "y": 0.5},
@@ -16,7 +16,7 @@
       "bodyPartSize": 0.4,
       "legPartSize": 0.4
     },
-    "History": {
+    "history": {
       "headAlignment": {"x": 0.1, "y": -0.3},
       "bodyAlignment": {"x": 0.5, "y": 0.5},
       "legAlignment": {"x": 0.5, "y": 0.5},
@@ -24,7 +24,7 @@
       "bodyPartSize": 0.3,
       "legPartSize": 0.3
     },
-    "SocialSciences": {
+    "socialsciences": {
       "headAlignment": {"x": 0.1, "y": -0.3},
       "bodyAlignment": {"x": 0.5, "y": 0.5},
       "legAlignment": {"x": 0.5, "y": 0.5},
@@ -32,7 +32,7 @@
       "bodyPartSize": 0.3,
       "legPartSize": 0.3
     },
-    "Science-Medicine": {
+    "science-medicine": {
       "headAlignment": {"x": 0.2, "y": -0.2},
       "bodyAlignment": {"x": 0.5, "y": 0.5},
       "legAlignment": {"x": 0.5, "y": 0.5},
@@ -40,7 +40,7 @@
       "bodyPartSize": 0.4,
       "legPartSize": 0.4
     },
-    "Technology-Home": {
+    "technology-home": {
       "headAlignment": {"x": 0.1, "y": 0.1},
       "bodyAlignment": {"x": 0.1, "y": 0.1},
       "legAlignment": {"x": 0.1, "y": 0.1},
@@ -48,7 +48,7 @@
       "bodyPartSize": 0.5,
       "legPartSize": 0.5
     },
-    "Industry": {
+    "industry": {
       "headAlignment": {"x": 0.1, "y": -0.3},
       "bodyAlignment": {"x": 0.5, "y": 0.5},
       "legAlignment": {"x": 0.5, "y": 0.5},
@@ -56,7 +56,7 @@
       "bodyPartSize": 0.3,
       "legPartSize": 0.3
     },
-    "Arts-Sports": {
+    "arts-sports": {
       "headAlignment": {"x": 0.2, "y": -0.2},
       "bodyAlignment": {"x": 0.5, "y": 0.5},
       "legAlignment": {"x": 0.5, "y": 0.5},
@@ -64,7 +64,7 @@
       "bodyPartSize": 0.4,
       "legPartSize": 0.4
     },
-    "Language": {
+    "language": {
       "headAlignment": {"x": 0.1, "y": 0.1},
       "bodyAlignment": {"x": 0.1, "y": 0.1},
       "legAlignment": {"x": 0.1, "y": 0.1},
@@ -72,7 +72,7 @@
       "bodyPartSize": 0.5,
       "legPartSize": 0.5
     },
-    "Literature": {
+    "literature": {
       "headAlignment": {"x": 0.1, "y": -0.3},
       "bodyAlignment": {"x": 0.5, "y": 0.5},
       "legAlignment": {"x": 0.5, "y": 0.5},
