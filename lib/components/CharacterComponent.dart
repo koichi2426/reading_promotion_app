@@ -11,22 +11,24 @@ class CharacterComponent extends StatelessWidget {
 
   String convertCategoryToEnglish(String category) {
     switch (category) {
-      case "総記・全般":
+      case "総記":
         return "generalities";
-      case "哲学・心理学":
-        return "philosophy-psychology";
+      case "心理学":
+        return "psychology";
       case "歴史":
         return "history";
       case "社会":
         return "socialsciences";
-      case "科学・医学":
+      case "科学医学":
         return "science-medicine";
-      case "技術・家庭":
-        return "technology-home";
+      case "技術":
+        return "technology";
       case "産業":
         return "industry";
-      case "芸術・体育":
-        return "arts-sports";
+      case "芸術":
+        return "arts";
+      case "体育":
+        return "sports";
       case "言語":
         return "language";
       case "文学":

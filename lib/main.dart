@@ -7,6 +7,7 @@ import 'package:reading_promotion_app/components/KindleComponent.dart';
 import 'package:reading_promotion_app/components/ReadComponent.dart';
 import 'package:reading_promotion_app/components/CharacterComponent.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:reading_promotion_app/components/UpdateCharacterWidget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'relatedBookData/pictureBook.dart';
@@ -97,12 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Expanded(
               child: Center(
-                child: CharacterComponent(
-                  key: UniqueKey(),
-                  genre1:'歴史',
-                  genre2:'文学',
-                  genre3:''
-                ),
+                child: UpdateCharacterWidget(),
               ),
             ),
             Row(
