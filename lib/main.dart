@@ -6,6 +6,7 @@ import 'package:reading_promotion_app/components/EncyclopediaComponent.dart';
 import 'package:reading_promotion_app/components/KindleComponent.dart';
 import 'package:reading_promotion_app/components/ReadComponent.dart';
 import 'package:reading_promotion_app/components/CharacterComponent.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'relatedBookData/pictureBook.dart';
@@ -42,6 +43,41 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<String> files = []; // Firebase Storageから取得したファイルリスト
+
+  @override
+  void initState() {
+    super.initState();
+    // アプリが起動したら最初にFirebase Storageから写真ファイルを取得
+    _getFilesFromStorage();
+  }
+
+  // Firebase Storageからファイルを取得する関数
+  Future<void> _getFilesFromStorage() async {
+    try {
+      // 指定されたパス内のファイル一覧を取得
+      Reference ref = FirebaseStorage.instance.ref('gs://coriander-app-f5b22.appspot.com/parts');
+      ListResult result = await ref.listAll();
+
+      // ファイルのURLをリストに追加
+      List<String> fileList = [];
+      result.items.forEach((Reference ref) {
+        fileList.add(ref.fullPath);
+      });
+
+      // 取得したファイルリストを更新
+      setState(() {
+        files = fileList;
+      });
+
+      print('Files in Storage: $files');
+    } catch (e) {
+      // エラーが発生した場合の処理
+      print('Error fetching files from Storage: $e');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
