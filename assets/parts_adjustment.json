@@ -16,13 +16,13 @@
       "bodyPartSize": 0.4,
       "legPartSize": 0.4
     },
-    "superhero": {
-      "headAlignment": {"x": 0.15, "y": -0.25},
-      "bodyAlignment": {"x": 0.5, "y": 0.6},
-      "legAlignment": {"x": 0.5, "y": 0.6},
-      "headPartSize": 0.9,
-      "bodyPartSize": 0.35,
-      "legPartSize": 0.35
+    "null": {
+      "headAlignment": {"x": 0, "y": 0},
+      "bodyAlignment": {"x": 0, "y": 0},
+      "legAlignment": {"x": 0, "y": 0},
+      "headPartSize": 0,
+      "bodyPartSize": 0,
+      "legPartSize": 0
     }
   }
 }
