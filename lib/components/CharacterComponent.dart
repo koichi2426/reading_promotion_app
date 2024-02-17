@@ -8,6 +8,33 @@ class CharacterComponent extends StatelessWidget {
 
   final String pathToParts = 'assets/images/parts/';
 
+  String convertCategoryToEnglish(String category) {
+    switch (category) {
+      case "総記・全般":
+        return "generalities";
+      case "哲学・心理学":
+        return "philosophy-psychology";
+      case "歴史":
+        return "history";
+      case "社会":
+        return "socialsciences";
+      case "科学・医学":
+        return "science-medicine";
+      case "技術・家庭":
+        return "technology-home";
+      case "産業":
+        return "industry";
+      case "芸術・体育":
+        return "arts-sports";
+      case "言語":
+        return "language";
+      case "文学":
+        return "literature";
+      default:
+        return "null";
+    }
+  }
+
   const CharacterComponent({
     required Key key,
     required this.genre1,
@@ -20,9 +47,9 @@ class CharacterComponent extends StatelessWidget {
     // CharacterDisplayWidgetを使用してキャラクターを表示
     return CharacterDisplayWidget(
       characterImagePath: 'assets/images/character.png', // キャラクターの基本画像パス
-      headPartImagePath: (genre1 != 'null' ? pathToParts + genre1 + '_0.png' : 'null'), // 頭部パーツの画像パス
-      bodyPartImagePath: (genre2 != 'null' ? pathToParts + genre2 + '_1.png' : 'null'), // 胴体パーツの画像パス
-      legPartImagePath:  (genre3 != 'null' ? pathToParts + genre3 + '_2.png' : 'null'), // 足部パーツの画像パス
+      headPartImagePath: (convertCategoryToEnglish(genre1) != 'null' ? pathToParts + convertCategoryToEnglish(genre1) + '_0.png' : 'null'), // 頭部パーツの画像パス
+      bodyPartImagePath: (convertCategoryToEnglish(genre2) != 'null' ? pathToParts + convertCategoryToEnglish(genre2) + '_1.png' : 'null'), // 胴体パーツの画像パス
+      legPartImagePath:  (convertCategoryToEnglish(genre3) != 'null' ? pathToParts + convertCategoryToEnglish(genre3) + '_2.png' : 'null'), // 足部パーツの画像パス
     );
   }
 }

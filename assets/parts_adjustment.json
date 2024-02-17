@@ -1,5 +1,21 @@
 {
   "genres": {
+    "generalities": {
+      "headAlignment": {"x": 0.1, "y": -0.3},
+      "bodyAlignment": {"x": 0.5, "y": 0.5},
+      "legAlignment": {"x": 0.5, "y": 0.5},
+      "headPartSize": 0.8,
+      "bodyPartSize": 0.3,
+      "legPartSize": 0.3
+    },
+    "philosophy-psychology": {
+      "headAlignment": {"x": 0.2, "y": -0.2},
+      "bodyAlignment": {"x": 0.5, "y": 0.5},
+      "legAlignment": {"x": 0.5, "y": 0.5},
+      "headPartSize": 0.7,
+      "bodyPartSize": 0.4,
+      "legPartSize": 0.4
+    },
     "history": {
       "headAlignment": {"x": 0.1, "y": -0.3},
       "bodyAlignment": {"x": 0.5, "y": 0.5},
@@ -8,7 +24,15 @@
       "bodyPartSize": 0.3,
       "legPartSize": 0.3
     },
-    "literature": {
+    "socialsciences": {
+      "headAlignment": {"x": 0.1, "y": -0.3},
+      "bodyAlignment": {"x": 0.5, "y": 0.5},
+      "legAlignment": {"x": 0.5, "y": 0.5},
+      "headPartSize": 0.8,
+      "bodyPartSize": 0.3,
+      "legPartSize": 0.3
+    },
+    "science-medicine": {
       "headAlignment": {"x": 0.2, "y": -0.2},
       "bodyAlignment": {"x": 0.5, "y": 0.5},
       "legAlignment": {"x": 0.5, "y": 0.5},
@@ -16,13 +40,53 @@
       "bodyPartSize": 0.4,
       "legPartSize": 0.4
     },
+    "technology-home": {
+      "headAlignment": {"x": 0.1, "y": 0.1},
+      "bodyAlignment": {"x": 0.1, "y": 0.1},
+      "legAlignment": {"x": 0.1, "y": 0.1},
+      "headPartSize": 0.5,
+      "bodyPartSize": 0.5,
+      "legPartSize": 0.5
+    },
+    "industry": {
+      "headAlignment": {"x": 0.1, "y": -0.3},
+      "bodyAlignment": {"x": 0.5, "y": 0.5},
+      "legAlignment": {"x": 0.5, "y": 0.5},
+      "headPartSize": 0.8,
+      "bodyPartSize": 0.3,
+      "legPartSize": 0.3
+    },
+    "arts-sports": {
+      "headAlignment": {"x": 0.2, "y": -0.2},
+      "bodyAlignment": {"x": 0.5, "y": 0.5},
+      "legAlignment": {"x": 0.5, "y": 0.5},
+      "headPartSize": 0.7,
+      "bodyPartSize": 0.4,
+      "legPartSize": 0.4
+    },
+    "language": {
+      "headAlignment": {"x": 0.1, "y": 0.1},
+      "bodyAlignment": {"x": 0.1, "y": 0.1},
+      "legAlignment": {"x": 0.1, "y": 0.1},
+      "headPartSize": 0.5,
+      "bodyPartSize": 0.5,
+      "legPartSize": 0.5
+    },
+    "literature": {
+      "headAlignment": {"x": 0.1, "y": -0.3},
+      "bodyAlignment": {"x": 0.5, "y": 0.5},
+      "legAlignment": {"x": 0.5, "y": 0.5},
+      "headPartSize": 0.8,
+      "bodyPartSize": 0.3,
+      "legPartSize": 0.3
+    },
     "null": {
-      "headAlignment": {"x": 0, "y": 0},
-      "bodyAlignment": {"x": 0, "y": 0},
-      "legAlignment": {"x": 0, "y": 0},
-      "headPartSize": 0,
-      "bodyPartSize": 0,
-      "legPartSize": 0
+      "headAlignment": {"x": 0.2, "y": -0.2},
+      "bodyAlignment": {"x": 0.5, "y": 0.5},
+      "legAlignment": {"x": 0.5, "y": 0.5},
+      "headPartSize": 0.0,
+      "bodyPartSize": 0.0,
+      "legPartSize": 0.0
     }
   }
 }
