@@ -6,6 +6,7 @@ import 'package:reading_promotion_app/components/EncyclopediaComponent.dart';
 import 'package:reading_promotion_app/components/KindleComponent.dart';
 import 'package:reading_promotion_app/components/ReadComponent.dart';
 import 'package:reading_promotion_app/components/CharacterComponent.dart';
+import 'package:reading_promotion_app/components/UpdateCharacterWidget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'relatedBookData/pictureBook.dart';
@@ -98,6 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 SizedBox(width: 40.0), // ボタン1とボタン2の間に余白を追加
+                UpdateCharacterWidget(),
                 Container(
                   margin: EdgeInsets.only(top: 80.0, right: 25),
                   child: GestureDetector(
