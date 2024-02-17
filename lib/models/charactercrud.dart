@@ -24,11 +24,11 @@ class Firestore {
     Future<void> read() async {
         final event = await db.collection("character").get();
         final docs = event.docs;
-        final _character = docs.map((doc) => Category.fromFirestore(doc)).toList();
+        final _character = docs.map((doc) => Character.fromFirestore(doc)).toList();
         this.character = _character;
     }
 
-    Future<void> delete(int id) async {
+    Future<void> delete(String id) async {
         await db.collection("character").doc(id).delete();
     }
 }

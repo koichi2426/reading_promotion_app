@@ -22,7 +22,7 @@ class Firestore {
         this.categorie = _categorie;
     }
 
-    Future<void> delete(int id) async {
+    Future<void> delete(String id) async {
         await db.collection("categorie").doc(id).delete();
     }
 }

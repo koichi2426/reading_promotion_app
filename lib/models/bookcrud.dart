@@ -11,7 +11,7 @@ class Firestore {
     ) async {
         final bookData = <String, dynamic> {
             'title': title,
-            'categoryId': categorieId,
+            'categoryId': categoryId,
         };
 
         db.collection("book").add(bookData).then((DocumentReference doc) => print("Added Data with ID: ${doc.id}"));
@@ -24,7 +24,7 @@ class Firestore {
         this.book = _book;
     }
 
-    Future<void> delete(int id) async {
+    Future<void> delete(String id) async {
         await db.collection("book").doc(id).delete();
     }
 }
