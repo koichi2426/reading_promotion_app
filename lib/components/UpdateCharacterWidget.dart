@@ -6,27 +6,29 @@ class UpdateCharacterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    return FutureBuilder<DocumentSnapshot>(
-      future: firestore.collection('characters').doc('2').get(),
-      builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+    return FutureBuilder<QuerySnapshot>(
+      future: firestore.collection('characters').orderBy(FieldPath.documentId, descending: true).limit(1).get(), // 最後のドキュメントを取得
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text('Something went wrong');
+          return Text('エラーが発生しました');
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator(); // データを取得中の場合はローディングインジケータを表示
+          return CircularProgressIndicator();
         }
 
-        if (snapshot.data?.exists ?? false) {
-          Map<String, dynamic> data = snapshot.data?.data() as Map<String, dynamic>;
+        if (snapshot.data != null && snapshot.data!.docs.isNotEmpty) {
+          // 最後のドキュメントを取得
+          DocumentSnapshot document = snapshot.data!.docs.first;
+          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
           return Column(
             children: <Widget>[
-              Text('Genre: ${data['genre']['first']}, ${data['genre']['second']}, ${data['genre']['third']}'),
-              // 他のウィジェットもここに追加してデータを表示
+              Text('ジャンル: ${data['genre']['first']}, ${data['genre']['second']}, ${data['genre']['third']}'),
+              // 他のデータを表示するためのウィジェットを追加します
             ],
           );
         } else {
-          return Text('Character not found!');
+          return Text('キャラクターが見つかりませんでした');
         }
       },
     );
