@@ -23,7 +23,7 @@ class Firestore {
         final _book = docs.map((doc) => Book.fromFirestore(doc)).toList();
         this.book = _book;
     }
-
+    
     Future<void> delete(String id) async {
         await db.collection("book").doc(id).delete();
     }
