@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'book.dart';
 import 'character.dart';
-import 'user.dart';
 
 class User {
-  final int id;
+  final String id;
   final Book book;
   final Character character;
 
@@ -17,9 +16,9 @@ class User {
   factory User.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return User(
-      id: data['id'],
-      book: data['book'],
-      character: data['character'],
+      id: doc.id,
+      book: Book.fromReference(data['book']),
+      character: Character.fromReference(data['character']),
     );
   }
 }

@@ -1,48 +1,28 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:reading_promotion_app/models/character.dart';
 import 'dart:convert';
-import '../models/usercrud.dart';
-import '../models/bookcrud.dart';
-import '../models/categorycrud.dart';
-import '../models/charactercrud.dart';
+import '../models/character.dart';
 
-class DataTestComponent extends StatefulWidget {
-  const DataTestComponent({Key? key}) : super(key: key);
+class DataTestComponent extends StatelessWidget {
+  final String description;
+  final String head;
+  final String body;
+  final String foot;
 
-  @override
-  _DataTestComponentState createState() => _DataTestComponentState();
-}
+  const DataTestComponent({
+    required this.description,
+    required this.head,
+    required this.body,
+    required this.foot,
+  });
 
-class _DataTestComponentState extends State<DataTestComponent> {
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () async {
-        _fetchUserData();
-        _fetchBookData();
-        _fetchCategoryData();
-        _fetchCharacterData();
-      },
-      style: ElevatedButton.styleFrom(
-        minimumSize: Size(200, 55), // ボタンの最小サイズ
-      ),
-    );
+    return DataTestComponent(
+        description: description, head: head, body: body, foot: foot);
   }
-
-  Future<void> _fetchUserData() async {
-    Book book;
-    Character character;
-    try{
-      final fetchedUser = await UserCrud().read();
-
-      setState(() {
-        user = fetchedUser;
-        Book book = user[0].book;
-        Character character = user[0].character;
-      })
-    }
-  }
-
 }

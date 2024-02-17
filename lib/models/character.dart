@@ -24,9 +24,8 @@ class Character {
 
     // キャラクターオブジェクトを作成して返す
     return Character(
-      id: ref.id,
+      id: data['id'],
       description: data['description'],
-      name: data['name'],
       head: data['head'],
       body: data['body'],
       foot: data['foot'],

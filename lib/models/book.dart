@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'category.dart';
 
 class Book {
   final int id;
@@ -10,16 +11,18 @@ class Book {
     required this.id,
     required this.title,
     required this.writer,
-    required this.categorieId,
+    required this.categoryId,
   });
 
-  factory Book.fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
+  static Future<Book> fromReference(DocumentReference ref) async {
+    DocumentSnapshot snap = await ref.get();
+    Map<String, dynamic> data = snap.data() as Map<String, dynamic>;
+
     return Book(
       id: data['id'],
       title: data['title'],
       writer: data['writer'],
-      categorieId: data['categorieID'],
+      categoryId: data['categoryId'],
     );
   }
 }
