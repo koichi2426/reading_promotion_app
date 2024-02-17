@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'CharacterDisplayWidget.dart'; // CharacterDisplayWidgetをインポート
+import 'ElementBarComponent.dart';
 
 class CharacterComponent extends StatelessWidget {
   final String genre1;
@@ -47,11 +48,17 @@ class CharacterComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // CharacterDisplayWidgetを使用してキャラクターを表示
-    return CharacterDisplayWidget(
-      characterImagePath: 'assets/images/character.png', // キャラクターの基本画像パス
-      headPartImagePath: (convertCategoryToEnglish(genre1) != 'null' ? pathToParts + convertCategoryToEnglish(genre1) + '_0.png' : 'null'), // 頭部パーツの画像パス
-      bodyPartImagePath: (convertCategoryToEnglish(genre2) != 'null' ? pathToParts + convertCategoryToEnglish(genre2) + '_1.png' : 'null'), // 胴体パーツの画像パス
-      legPartImagePath:  (convertCategoryToEnglish(genre3) != 'null' ? pathToParts + convertCategoryToEnglish(genre3) + '_2.png' : 'null'), // 足部パーツの画像パス
+    return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElementBarComponent(),
+              CharacterDisplayWidget(
+                characterImagePath: 'assets/images/character.png', // キャラクターの基本画像パス
+                headPartImagePath: (convertCategoryToEnglish(genre1) != 'null' ? pathToParts + convertCategoryToEnglish(genre1) + '_0.png' : 'null'), // 頭部パーツの画像パス
+                bodyPartImagePath: (convertCategoryToEnglish(genre2) != 'null' ? pathToParts + convertCategoryToEnglish(genre2) + '_1.png' : 'null'), // 胴体パーツの画像パス
+                legPartImagePath:  (convertCategoryToEnglish(genre3) != 'null' ? pathToParts + convertCategoryToEnglish(genre3) + '_2.png' : 'null'), // 足部パーツの画像パス
+              ),
+            ],
     );
   }
 }
