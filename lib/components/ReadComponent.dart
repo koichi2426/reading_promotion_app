@@ -34,7 +34,7 @@ class ReadComponent extends StatelessWidget {
       },
       child: Ink(
         decoration: BoxDecoration(
-      boxShadow: [
+          boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
               spreadRadius: 4,
@@ -43,10 +43,6 @@ class ReadComponent extends StatelessWidget {
             ),
           ],
           shape: BoxShape.circle,
-          image: DecorationImage(
-            image: AssetImage('assets/images/add_button.png'),
-            fit: BoxFit.cover,
-          ),
         ),
         child: Container(
           width: 180,
@@ -56,15 +52,15 @@ class ReadComponent extends StatelessWidget {
       ),
       style: ElevatedButton.styleFrom(
         shape: const CircleBorder(
-      side: BorderSide(
-        color: Colors.black,
-        width: 0.5,
-        style: BorderStyle.solid,
-      ),
-    ),
+          side: BorderSide(
+            color: Colors.black,
+            width: 0.5,
+            style: BorderStyle.solid,
+          ),
+        ),
         padding: EdgeInsets.zero,
-        onSurface: Colors.transparent,
-        shadowColor: Colors.transparent, // ボタンの影を透明に設定
+        shadowColor: Colors.transparent,
+        //onSurface: Colors.transparent, // ボタンの影を透明に設定
       ),
     );
   }
