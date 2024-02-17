@@ -13,19 +13,19 @@ class CharacterComponent extends StatelessWidget {
       case "総記・全般":
         return "Generalities";
       case "哲学・心理学":
-        return "Philosophy/Psychology";
+        return "Philosophy-Psychology";
       case "歴史":
         return "History";
       case "社会":
         return "SocialSciences";
       case "科学・医学":
-        return "Science/Medicine";
+        return "Science-Medicine";
       case "技術・家庭":
         return "Technology/Home";
       case "産業":
         return "Industry";
       case "芸術・体育":
-        return "Arts/Sports";
+        return "Arts-Sports";
       case "言語":
         return "Language";
       case "文学":
