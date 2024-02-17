@@ -89,7 +89,7 @@ class CharacterDisplayWidget extends StatelessWidget {
   }
 
   Future<Map<String, dynamic>> loadAdjustmentData() async {
-  String jsonString = await rootBundle.loadString('parts_adjustment.json');
+  String jsonString = await rootBundle.loadString('assets/parts_adjustment.json');
   return json.decode(jsonString);
 }
 
