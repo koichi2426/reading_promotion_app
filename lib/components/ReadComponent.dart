@@ -12,29 +12,60 @@ class ReadComponent extends StatelessWidget {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            // ダイアログの内容をここに書く
             return Dialog(
+              backgroundColor: Color(0xFFD2B48C),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
               child: Container(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(20.0),
                 height: 150.0,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    // Kindleボタン
                     BarcodeComponent(),
-                    // バーコードボタン
-                    KindleComponent()
-                    ],
+                    KindleComponent(),
+                  ],
                 ),
               ),
             );
           },
         );
       },
-      child: Text('Read'), // ボタンのテキスト
+      child: Ink(
+        decoration: BoxDecoration(
+      boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 4,
+              blurRadius: 10,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: AssetImage('assets/images/add_button.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Container(
+          width: 200,
+          height: 200,
+          alignment: Alignment.center,
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        shape: const CircleBorder(
+      side: BorderSide(
+        color: Colors.black,
+        width: 0.5,
+        style: BorderStyle.solid,
+      ),
+    ),
+        padding: EdgeInsets.zero,
+        onSurface: Colors.transparent,
+        shadowColor: Colors.transparent, // ボタンの影を透明に設定
+      ),
     );
   }
 }
