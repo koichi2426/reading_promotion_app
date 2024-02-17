@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:reading_promotion_app/components/CharacterComponent.dart';
 
 class UpdateCharacterWidget extends StatelessWidget {
   @override
@@ -21,11 +22,11 @@ class UpdateCharacterWidget extends StatelessWidget {
           // 最後のドキュメントを取得
           DocumentSnapshot document = snapshot.data!.docs.last;
           Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-          return Column(
-            children: <Widget>[
-              Text('ジャンル: ${data['genre']['first']}, ${data['genre']['second']}, ${data['genre']['third']}'),
-              // 他のデータを表示するためのウィジェットを追加します
-            ],
+          return CharacterComponent(
+            key: UniqueKey(),
+            genre1:data['genre']['first'],
+            genre2:data['genre']['second'],
+            genre3:data['genre']['third']
           );
         } else {
           return Text('キャラクターが見つかりませんでした');
@@ -34,3 +35,4 @@ class UpdateCharacterWidget extends StatelessWidget {
     );
   }
 }
+

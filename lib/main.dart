@@ -62,12 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Expanded(
               child: Center(
-                child: CharacterComponent(
-                  key: UniqueKey(),
-                  genre1:'歴史',
-                  genre2:'文学',
-                  genre3:''
-                ),
+                child: UpdateCharacterWidget(),
               ),
             ),
             Row(
@@ -99,7 +94,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 SizedBox(width: 40.0), // ボタン1とボタン2の間に余白を追加
-                UpdateCharacterWidget(),
                 Container(
                   margin: EdgeInsets.only(top: 80.0, right: 25),
                   child: GestureDetector(
