@@ -1,4 +1,25 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
+
+// ジャンルごとの調整情報を格納するクラス
+class GenreAdjustment {
+  final Alignment headAlignment;
+  final Alignment bodyAlignment;
+  final Alignment legAlignment;
+  final double headPartSize;
+  final double bodyPartSize;
+  final double legPartSize;
+
+  GenreAdjustment({
+    required this.headAlignment,
+    required this.bodyAlignment,
+    required this.legAlignment,
+    required this.headPartSize,
+    required this.bodyPartSize,
+    required this.legPartSize,
+  });
+}
 
 class CharacterDisplayWidget extends StatelessWidget {
   final String characterImagePath;
@@ -26,15 +47,51 @@ class CharacterDisplayWidget extends StatelessWidget {
     this.legPartSize = 0.3,
   }) : super(key: key);
 
-  //ジャンル判別処理
-  //頭パーツの位置
-  //胴体パーツの位置
-  //脚パーツの位置
-  //頭パーツのサイズ
-  //胴体パーツのサイズ
-  //脚パーツのサイズ
   
+  Future<GenreAdjustment> getGenreAdjustment({
+  required String headImagePath,
+  required String bodyImagePath,
+  required String legImagePath,
+}) async {
+  // 調整データを一度だけ読み込む
+  Map<String, dynamic> adjustmentData = await loadAdjustmentData();
 
+  // 頭部のジャンルに基づく調整データを取得
+  String headGenre = extractGenre(headImagePath);
+  Map<String, dynamic> headGenreData = adjustmentData['genres'][headGenre];
+
+  // 体部のジャンルに基づく調整データを取得
+  String bodyGenre = extractGenre(bodyImagePath);
+  Map<String, dynamic> bodyGenreData = adjustmentData['genres'][bodyGenre];
+
+  // 脚部のジャンルに基づく調整データを取得
+  String legGenre = extractGenre(legImagePath);
+  Map<String, dynamic> legGenreData = adjustmentData['genres'][legGenre];
+
+  // 各パーツの配置とサイズを取得してGenreAdjustmentオブジェクトを作成
+  return GenreAdjustment(
+    headAlignment: Alignment(
+      headGenreData['headAlignment']['x'],
+      headGenreData['headAlignment']['y'],
+    ),
+    bodyAlignment: Alignment(
+      bodyGenreData['bodyAlignment']['x'],
+      bodyGenreData['bodyAlignment']['y'],
+    ),
+    legAlignment: Alignment(
+      legGenreData['legAlignment']['x'],
+      legGenreData['legAlignment']['y'],
+    ),
+    headPartSize: headGenreData['headPartSize'],
+    bodyPartSize: bodyGenreData['bodyPartSize'],
+    legPartSize: legGenreData['legPartSize'],
+  );
+}
+
+  Future<Map<String, dynamic>> loadAdjustmentData() async {
+  String jsonString = await rootBundle.loadString('assets/parts_adjustment.json');
+  return json.decode(jsonString);
+}
 
   String extractGenre(String imagePath) {
     // パスをスラッシュ('/')で分割し、最後の要素を取得

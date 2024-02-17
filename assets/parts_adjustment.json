@@ -1,29 +1,28 @@
 {
-    "genres": {
-      "fantasy": {
-        "headAlignment": {"x": 0.1, "y": -0.3},
-        "bodyAlignment": {"x": 0.5, "y": 0.5},
-        "legAlignment": {"x": 0.5, "y": 0.5},
-        "headPartSize": 0.8,
-        "bodyPartSize": 0.3,
-        "legPartSize": 0.3
-      },
-      "sci-fi": {
-        "headAlignment": {"x": 0.2, "y": -0.2},
-        "bodyAlignment": {"x": 0.5, "y": 0.5},
-        "legAlignment": {"x": 0.5, "y": 0.5},
-        "headPartSize": 0.7,
-        "bodyPartSize": 0.4,
-        "legPartSize": 0.4
-      },
-      "superhero": {
-        "headAlignment": {"x": 0.15, "y": -0.25},
-        "bodyAlignment": {"x": 0.5, "y": 0.6},
-        "legAlignment": {"x": 0.5, "y": 0.6},
-        "headPartSize": 0.9,
-        "bodyPartSize": 0.35,
-        "legPartSize": 0.35
-      }
+  "genres": {
+    "history": {
+      "headAlignment": {"x": 0.1, "y": -0.3},
+      "bodyAlignment": {"x": 0.5, "y": 0.5},
+      "legAlignment": {"x": 0.5, "y": 0.5},
+      "headPartSize": 0.8,
+      "bodyPartSize": 0.3,
+      "legPartSize": 0.3
+    },
+    "literature": {
+      "headAlignment": {"x": 0.2, "y": -0.2},
+      "bodyAlignment": {"x": 0.5, "y": 0.5},
+      "legAlignment": {"x": 0.5, "y": 0.5},
+      "headPartSize": 0.7,
+      "bodyPartSize": 0.4,
+      "legPartSize": 0.4
+    },
+    "superhero": {
+      "headAlignment": {"x": 0.15, "y": -0.25},
+      "bodyAlignment": {"x": 0.5, "y": 0.6},
+      "legAlignment": {"x": 0.5, "y": 0.6},
+      "headPartSize": 0.9,
+      "bodyPartSize": 0.35,
+      "legPartSize": 0.35
     }
   }
-  
+}
