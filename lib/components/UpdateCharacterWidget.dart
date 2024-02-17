@@ -6,8 +6,8 @@ class UpdateCharacterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    return FutureBuilder<QuerySnapshot>(
-      future: firestore.collection('characters').orderBy(FieldPath.documentId, descending: true).limit(1).get(), // 最後のドキュメントを取得
+    return StreamBuilder<QuerySnapshot>(
+      stream: firestore.collection('characters').snapshots(), // クエリの結果をストリームで受け取る
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return Text('エラーが発生しました');
@@ -19,7 +19,7 @@ class UpdateCharacterWidget extends StatelessWidget {
 
         if (snapshot.data != null && snapshot.data!.docs.isNotEmpty) {
           // 最後のドキュメントを取得
-          DocumentSnapshot document = snapshot.data!.docs.first;
+          DocumentSnapshot document = snapshot.data!.docs.last;
           Map<String, dynamic> data = document.data() as Map<String, dynamic>;
           return Column(
             children: <Widget>[
