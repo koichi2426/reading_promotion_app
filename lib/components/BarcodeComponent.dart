@@ -5,6 +5,10 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'dart:convert';
 import '../relatedBookData/crud.dart';
 import '../relatedBookData/gptApi.dart';
+import '../relatedBookData/crud.dart' as BookCrud;
+import '../relatedCharaData/chara_crud.dart' as CharaCrud;
+import '../relatedCharaData/genreCounter.dart';
+import 'package:provider/provider.dart';
 
 class BarcodeComponent extends StatefulWidget {
   const BarcodeComponent({Key? key}) : super(key: key);
@@ -42,6 +46,8 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
   }
 
   Future<void> _fetchBookInfo(String isbn) async {
+    final genreCounter = Provider.of<GenreCounter>(context, listen: false);
+
     try {
       final fetchedBook = await BookRepository().fetchBookfromIsbn(isbn);
 
@@ -53,16 +59,17 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
 
       if (title.isNotEmpty) {
         genre = await ApiService().callApi(book!.author, book!.title);
-        _showConfirmationDialog(); // タイトルが空でなければ確認ダイアログを表示
+
+        _showConfirmationDialog(genreCounter);
       } else {
-        _showErrorDialog(); // タイトルが空の場合はエラーダイアログを表示
+        _showErrorDialog(genreCounter); // タイトルが空の場合はエラーダイアログを表示
       }
     } catch (error) {
-      _showErrorDialog();
+      _showErrorDialog(genreCounter);
     }
   }
 
-  void _showConfirmationDialog() {
+  void _showConfirmationDialog(GenreCounter genreCounter) {
     AwesomeDialog(
       context: context,
       dialogType: DialogType.success,
@@ -78,7 +85,13 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
         String publishedDate = book!.publishedDate;
         String description = book!.description;
 
-        await Firestore().create(
+        genreCounter.increment();
+
+        await CharaCrud.Firestore().genreUpdate(genre, genreCounter);
+
+        print(genreCounter.count);
+
+        await BookCrud.Firestore().create(
           title,
           author,
           genre,
@@ -86,6 +99,7 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
           publishedDate,
           description,
         );
+
         Navigator.pop(context); // Close dialog
         //Navigator.pop(context); // Close BarcodePage
       },
@@ -93,7 +107,7 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
     )..show();
   }
 
-  void _showErrorDialog() {
+  void _showErrorDialog(GenreCounter genreCounter) {
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,
@@ -106,14 +120,14 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
       },
       btnCancelText: '閉じる',
       btnOkOnPress: () {
-        _showKeyboardDialog();
+        _showKeyboardDialog(genreCounter);
         //Navigator.of(context).pop();
       },
       btnOkText: 'キーボードで登録',
     )..show();
   }
 
-  void _showKeyboardDialog() {
+  void _showKeyboardDialog(GenreCounter genreCounter) {
     TextEditingController titleController = TextEditingController();
     TextEditingController authorController = TextEditingController();
     AwesomeDialog(
@@ -139,10 +153,16 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
         String author = authorController.text;
         genre = await ApiService().callApi(title, author);
 
+        genreCounter.increment();
+
+        await CharaCrud.Firestore().genreUpdate(genre, genreCounter);
+
+        print(genreCounter.count);
+
         String imageLink =
             'https://th.bing.com/th/id/R.1544a44cd6dff1c0219bca46e0f0a4a2?rik=ZkfnNczbKsww3Q&riu=http%3a%2f%2f4.bp.blogspot.com%2f-bwbcXAaqtTM%2fUZ7s_dXPVdI%2fAAAAAAAAEfw%2f4D-2cKz-f1g%2fs1600%2f001%2525E8%2525B5%2525A4.jpg&ehk=4fGOsb94XR5T%2bcoavVME%2fpRyKAs3y3T80LEW2p%2bmw2A%3d&risl=&pid=ImgRaw&r=0';
         debugPrint(imageLink);
-        await Firestore().create(
+        await BookCrud.Firestore().create(
             title, author, genre, imageLink, 'YYYY-MM-DD', '取得できませんでした');
       },
       btnOkText: '登録',
