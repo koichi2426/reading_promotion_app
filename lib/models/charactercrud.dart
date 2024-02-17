@@ -31,4 +31,5 @@ class Firestore {
     Future<void> delete(String id) async {
         await db.collection("character").doc(id).delete();
     }
+    
 }

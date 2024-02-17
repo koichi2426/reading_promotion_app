@@ -14,7 +14,7 @@ class Firestore {
 
         db.collection("categorie").add(categorieInfo).then((DocumentReference doc) => print("Added Data with ID: ${doc.id}"));
     }
-
+    
     Future<void> read() async {
         final event = await db.collection("categorie").get();
         final docs = event.docs;
