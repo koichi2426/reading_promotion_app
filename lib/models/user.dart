@@ -1,14 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'book.dart';
+import 'character.dart';
+import 'user.dart';
 
 class User{
-    final int id;
+    final String id;
     final Book book;
-    final Character charcter;
+    final Character character;
 
     User({
         required this.id,
-        required this.books,
-        required this.characters,
+        required this.book,
+        required this.character
     });
 
     factory User.fromFirestore(DocumentSnapshot doc) {

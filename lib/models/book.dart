@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Book {
-    final int id;
+    final String id;
     final String title;
     final int categoryId;
 
     Book({
         required this.id,
         required this.title,
-        required this.categorieId,
+        required this.categoryId,
     });
 
     factory Book.fromFirestore(DocumentSnapshot doc) {
@@ -16,7 +16,7 @@ class Book {
         return Book(
             id: doc.id,
             title: data.fromMap(data['title']),
-            categorieId: data.fromMap(data['categorieID']),
+            categoryId: data.fromMap(data['categorieID']),
         );
     }
 }
