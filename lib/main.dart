@@ -55,8 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: CharacterComponent(
                   key: UniqueKey(),
                   genre1:'history',
-                  genre2:'null',
-                  genre3:'null'
+                  genre2:'history',
+                  genre3:'history'
                 ),
               ),
             ),
