@@ -49,8 +49,8 @@ class ReadComponent extends StatelessWidget {
           ),
         ),
         child: Container(
-          width: 200,
-          height: 200,
+          width: 180,
+          height: 180,
           alignment: Alignment.center,
         ),
       ),
