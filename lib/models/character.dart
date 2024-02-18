@@ -1,34 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Character {
-  final int id;
-  final String description;
   final String head;
   final String body;
-  final String foot;
+  final String hand;
 
   Character({
-    required this.id,
-    required this.description,
     required this.head,
     required this.body,
-    required this.foot,
+    required this.hand,
   });
 
-  static Future<Character> fromReference(DocumentReference ref) async {
-    // DocumentReferenceからDocumentSnapshotを取得する
-    DocumentSnapshot snapshot = await ref.get();
+  factory Character.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
 
-    // DocumentSnapshotからデータを取得する
-    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-
-    // キャラクターオブジェクトを作成して返す
     return Character(
-      id: data['id'],
-      description: data['description'],
-      head: data['head'],
-      body: data['body'],
-      foot: data['foot'],
-    );
+        head: data['head'], body: data['body'], hand: data['hand']);
   }
 }
