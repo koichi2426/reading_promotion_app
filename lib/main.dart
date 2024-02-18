@@ -13,6 +13,9 @@ import 'relatedBookData/pictureBook.dart';
 import 'relatedCharaData/genreCounter.dart';
 import 'package:provider/provider.dart';
 
+import 'package:reading_promotion_app/components/DataTestComponent.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -145,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   BarcodeComponent(),
                                   KindleComponent(),
+                                  DataTestComponent(),
                                 ],
                               ),
                             ),
