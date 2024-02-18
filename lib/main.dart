@@ -56,11 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               child: Center(
                 child: CharacterComponent(
-                  key: UniqueKey(),
-                  genre1:'history',
-                  genre2:'null',
-                  genre3:'null'
-                ),
+                    key: UniqueKey(),
+                    genre1: 'history',
+                    genre2: 'null',
+                    genre3: 'null'),
               ),
             ),
             Row(
@@ -142,9 +141,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   BarcodeComponent(),
                                   KindleComponent(),
-
-                                  // add firebase data test
-                                  DataTestComponent(),
                                 ],
                               ),
                             ),
