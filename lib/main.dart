@@ -141,6 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   BarcodeComponent(),
                                   KindleComponent(),
+                                  DataTestComponent(),
                                 ],
                               ),
                             ),
