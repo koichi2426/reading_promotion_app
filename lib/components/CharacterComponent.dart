@@ -53,10 +53,10 @@ class CharacterComponent extends StatelessWidget {
             children: <Widget>[
               ElementBarComponent(),
               PartsConnectionWidget(
-                imagePaths: [
-                  pathToParts + 'null' + '_0.png', // 画像ファイルのパスをここに指定してください
-                  pathToParts + 'null' + '_1.png', // 画像ファイルのパスをここに指定してください
-                  pathToParts + 'null' + '_2.png', // 画像ファイルのパスをここに指定してください
+                genres: [
+                  'null',
+                  'null',
+                  'null',
                 ],
               ),
             ],
