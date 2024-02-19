@@ -56,9 +56,18 @@ class _EncyclopediaComponentState extends State<EncyclopediaComponent> {
         // children: characters
 
         children: [
-          Text('a'), //tmp
-          Text('b'), //tmp
-          Text('c'), //tmp
+          Text(
+            'tmp',
+            style: TextStyle(fontSize: 119),
+          ),
+          Text(
+            'tmp',
+            style: TextStyle(fontSize: 119),
+          ),
+          Text(
+            'tmp',
+            style: TextStyle(fontSize: 119),
+          ),
         ]
 
       ),
