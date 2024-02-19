@@ -6,16 +6,29 @@ import 'package:reading_promotion_app/components/EncyclopediaComponent.dart';
 import 'package:reading_promotion_app/components/KindleComponent.dart';
 import 'package:reading_promotion_app/components/ReadComponent.dart';
 import 'package:reading_promotion_app/components/CharacterComponent.dart';
+import 'package:reading_promotion_app/components/UpdateCharacterWidget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'relatedBookData/pictureBook.dart';
+import 'relatedCharaData/genreCounter.dart';
+import 'package:provider/provider.dart';
+
+import 'package:reading_promotion_app/components/DataTestComponent.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => GenreCounter()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -33,6 +46,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -52,12 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Expanded(
               child: Center(
-                child: CharacterComponent(
-                  key: UniqueKey(),
-                  genre1:'history',
-                  genre2:'null',
-                  genre3:'null'
-                ),
+                child: UpdateCharacterWidget(),
               ),
             ),
             Row(
@@ -118,6 +127,34 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
+                SizedBox(width: 40.0),
+                Container(
+                  margin: EdgeInsets.only(top: 80.0, right: 25),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DataTestComponent(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 155),
+                        borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(color: Colors.white, width: 1.0),
+                      ),
+                      child: Image.asset(
+                        'assets/images/graduate_button.png',
+                        width: 30,
+                        height: 30,
+                      ),
+                    ),
+                  ),
+                ),
 
                 Expanded(
                   child: TextButton(
@@ -139,6 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   BarcodeComponent(),
                                   KindleComponent(),
+                                  DataTestComponent(),
                                 ],
                               ),
                             ),
