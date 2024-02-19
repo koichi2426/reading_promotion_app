@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:reading_promotion_app/relatedCharaData/characters.dart';
+import 'package:reading_promotion_app/relatedCharaData/chara_crud.dart';
 
-class EncyclopediaComponent extends StatelessWidget {
+class EncyclopediaComponent extends StatefulWidget {
   const EncyclopediaComponent({super.key}) : super(key: key);
 
   @override
@@ -9,8 +11,8 @@ class EncyclopediaComponent extends StatelessWidget {
 
 class _EncyclopediaComponentState extends State<EncyclopediaComponent> {
   
-  // List<Characters> characters = [];
-  // Firestore firestore = Firestore();
+  List<Character> characters = [];
+  Firestore firestore = Firestore();
 
   @override
   void initState() {
@@ -19,14 +21,49 @@ class _EncyclopediaComponentState extends State<EncyclopediaComponent> {
   }
 
   Future<void> _fetchCharacters() async {
-    // get character info from firestore???
+    await firestore.read();
+    setState(() {
+      characters = firestore.characters;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // write code about UI???
-    )
+
+      appBar: AppBar(
+        
+        backgroundColor: Colors.grey.withOpacity(0.3),
+        
+        title: Text(
+          'これまで育成したキャラクター',
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ), 
+        ), 
+        
+        centerTitle: true,      
+      
+      ),
+      
+      backgroundColor: Color(0xFFF5DEB3),
+      
+      body: GridView.count(
+        
+        crossAxisCount: 2,
+        
+        // children: characters
+
+        children: [
+          Text('a'), //tmp
+          Text('b'), //tmp
+          Text('c'), //tmp
+        ]
+
+      ),
+    
+    );
   }
 
 }
