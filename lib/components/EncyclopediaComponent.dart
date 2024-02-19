@@ -3,7 +3,7 @@ import 'package:reading_promotion_app/relatedCharaData/characters.dart';
 import 'package:reading_promotion_app/relatedCharaData/chara_crud.dart';
 
 class EncyclopediaComponent extends StatefulWidget {
-  const EncyclopediaComponent({super.key}) : super(key: key);
+  const EncyclopediaComponent({Key? key}) : super(key: key);
 
   @override
   _EncyclopediaComponentState createState() => _EncyclopediaComponentState();
