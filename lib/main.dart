@@ -132,7 +132,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   margin: EdgeInsets.only(top: 80.0, right: 25),
                   child: GestureDetector(
                     onTap: () {
-                      print("datatestbutton on click");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DataTestComponent(),
+                        ),
+                      );
                     },
                     child: Container(
                       padding:
