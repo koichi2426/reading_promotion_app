@@ -1,4 +1,6 @@
 // DataTestComponent.dart
+
+/*
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reading_promotion_app/models/character.dart';
@@ -39,4 +41,4 @@ class DataTestComponent extends StatelessWidget {
       },
     );
   }
-}
+}*/
