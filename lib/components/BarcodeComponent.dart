@@ -9,6 +9,7 @@ import '../relatedBookData/crud.dart' as BookCrud;
 import '../relatedCharaData/chara_crud.dart' as CharaCrud;
 import '../relatedCharaData/genreCounter.dart';
 import 'package:provider/provider.dart';
+import '../components/PartsConnectionWidget.dart';
 
 class BarcodeComponent extends StatefulWidget {
   const BarcodeComponent({Key? key}) : super(key: key);
@@ -87,7 +88,9 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
 
         genreCounter.increment();
 
-        await CharaCrud.Firestore().genreUpdate(genre, genreCounter);
+        await CharaCrud.Firestore(
+                partsConnectionWidget: PartsConnectionWidget(genres: []))
+            .genreUpdate(genre, genreCounter);
 
         print(genreCounter.count);
 
@@ -155,7 +158,9 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
 
         genreCounter.increment();
 
-        await CharaCrud.Firestore().genreUpdate(genre, genreCounter);
+        await CharaCrud.Firestore(
+                partsConnectionWidget: PartsConnectionWidget(genres: []))
+            .genreUpdate(genre, genreCounter);
 
         print(genreCounter.count);
 

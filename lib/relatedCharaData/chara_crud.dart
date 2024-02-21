@@ -3,10 +3,17 @@ import 'package:flutter/material.dart';
 import '../relatedCharaData/characters.dart';
 import '../relatedCharaData/genreCounter.dart';
 import 'PersistenceService.dart';
+import '../components/PartsConnectionWidget.dart';
+import '../imageCreate/ImageBook.dart';
 
 class Firestore {
   List<Character> characters = [];
   final db = FirebaseFirestore.instance;
+  final PartsConnectionWidget partsConnectionWidget;
+  ImageBook imageBook = ImageBook();
+
+  Firestore({required this.partsConnectionWidget});
+  // コンストラクターで PartsConnectionWidget のインスタンスを受け取る
 
   Future<void> genreUpdate(String genre, GenreCounter genreCounter) async {
     // characters コレクションの参照を取得
@@ -59,7 +66,22 @@ class Firestore {
           'third': genre,
         },
       });
-      charaDataCreate();
+      /*
+      await Future.delayed(Duration(seconds: 2));
+      List<String> imageUrls = await partsConnectionWidget.getImageUrls();
+
+      debugPrint(imageUrls[1]);
+
+      String CharaImageUrl =
+          await imageBook.uploadLocalImageToFirestore(imageUrls);
+
+      debugPrint(CharaImageUrl);
+
+      await db.collection('characters').doc(documentCount.toString()).update({
+        'imageUrl': CharaImageUrl,
+      });
+      */
+      await charaDataCreate();
     }
   }
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import '../relatedCharaData/genreCounter.dart';
+import '../imageCreate/imageBook.dart';
 
 class PartsConnectionWidget extends StatelessWidget {
   final List<String> genres;
@@ -8,8 +10,9 @@ class PartsConnectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return FutureBuilder<List<String>>(
-      future: _getImageUrls(),
+      future: getImageUrls(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator(); // データ取得中はローディングを表示
@@ -31,24 +34,22 @@ class PartsConnectionWidget extends StatelessWidget {
   }
 
   // Firebase Storageから画像URLを取得する非同期関数
-  Future<List<String>> _getImageUrls() async {
+  Future<List<String>> getImageUrls() async {
     try {
       // Firebase Storageのリファレンスを取得する
       firebase_storage.Reference storageRef =
           firebase_storage.FirebaseStorage.instance.ref();
 
       // 画像のURLを取得する
-      String downloadUrl_Head = await storageRef
-          .child('parts/${genres[0]}_0.png')
-          .getDownloadURL();
+      String downloadUrl_Head =
+          await storageRef.child('parts/${genres[0]}_0.png').getDownloadURL();
 
-      String downloadUrl_body = await storageRef
-          .child('parts/${genres[1]}_1.png')
-          .getDownloadURL();
+      String downloadUrl_body =
+          await storageRef.child('parts/${genres[1]}_1.png').getDownloadURL();
 
-      String downloadUrl_foot = await storageRef
-          .child('parts/${genres[2]}_2.png')
-          .getDownloadURL();
+      String downloadUrl_foot =
+          await storageRef.child('parts/${genres[2]}_2.png').getDownloadURL();
+
 
       // 画像URLをリストに追加して返す
       return [
