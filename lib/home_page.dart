@@ -14,6 +14,7 @@ import 'relatedCharaData/genreCounter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -30,6 +31,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String userid = "";
+  @override
+  void initState() {
+    try {
+      final auth = FirebaseAuth.instance;
+      final authid = auth.currentUser?.uid.toString();
+      if (authid == null) {
+        print("uid can't get");
+      } else {
+        userid = authid;
+        print("uid is ${userid}");
+      }
+      return;
+    } catch (e) {
+      print("Error in get user id: ${e}");
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
