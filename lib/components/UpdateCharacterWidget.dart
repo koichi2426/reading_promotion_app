@@ -17,7 +17,7 @@ class UpdateCharacterWidget extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator();
         }
-
+        
         if (snapshot.data != null && snapshot.data!.docs.isNotEmpty) {
           // 最後のドキュメントを取得
           DocumentSnapshot document = snapshot.data!.docs.last;
