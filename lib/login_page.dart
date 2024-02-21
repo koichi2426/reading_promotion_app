@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'home_page.dart';
 
 enum FormType { login, register }
 
@@ -52,8 +53,10 @@ class _LoginPageState extends State<LoginPage> {
                             .createUserWithEmailAndPassword(
                                 email: _email, password: _password))
                         .user;
-                    if (user != null)
+                    if (user != null) {
                       print("ユーザ登録しました ${user.email} , ${user.uid}");
+                      Navigator.of(context).pushNamed('/home');
+                    }
                   } catch (e) {
                     print(e);
                   }
@@ -69,8 +72,10 @@ class _LoginPageState extends State<LoginPage> {
                             .signInWithEmailAndPassword(
                                 email: _email, password: _password))
                         .user;
-                    if (user != null)
+                    if (user != null) {
                       print("ログインしました　${user.email} , ${user.uid}");
+                      Navigator.of(context).pushNamed('/home');
+                    }
                   } catch (e) {
                     print(e);
                   }
