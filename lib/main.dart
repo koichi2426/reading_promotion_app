@@ -16,6 +16,8 @@ import 'package:provider/provider.dart';
 import 'package:reading_promotion_app/components/DataTestComponent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'relatedCharaData/charaBook.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -77,6 +79,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: GestureDetector(
                     onTap: () {
                       //キャラクター図鑑を表示する chip chip chapa chapa
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => charaBookPage()),
+                      );
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -132,12 +139,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   margin: EdgeInsets.only(top: 80.0, right: 25),
                   child: GestureDetector(
                     onTap: () {
+                      /*
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => DataTestComponent(),
                         ),
                       );
+                      */
                     },
                     child: Container(
                       padding:
@@ -176,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   BarcodeComponent(),
                                   KindleComponent(),
-                                  DataTestComponent(),
+                                  //DataTestComponent(),
                                 ],
                               ),
                             ),
