@@ -15,9 +15,10 @@ class _RootPageState extends State<RootPage> {
   initState() {
     User? user = FirebaseAuth.instance.currentUser;
     if (user == null) {
+      print('user not logined');
       Navigator.pushReplacementNamed(context, "/login");
     } else {
-      print('login not yet');
+      print('user already login');
       Navigator.pushReplacementNamed(context, "/home");
     }
     super.initState();
