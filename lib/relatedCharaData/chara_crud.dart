@@ -2,17 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../relatedCharaData/characters.dart';
 import '../relatedCharaData/genreCounter.dart';
-import 'PersistenceService.dart';
+import 'PersistenceService.dart' as GenreCount;
+import '../imageCreate/PersistenceService.dart' as getImageUrl;
 import '../components/PartsConnectionWidget.dart';
-import '../imageCreate/ImageBook.dart';
+import '../imageCreate/charaCreate.dart';
 
 class Firestore {
   List<Character> characters = [];
   final db = FirebaseFirestore.instance;
-  final PartsConnectionWidget partsConnectionWidget;
-  ImageBook imageBook = ImageBook();
 
-  Firestore({required this.partsConnectionWidget});
+  charaCreate imageBook = charaCreate();
+
   // コンストラクターで PartsConnectionWidget のインスタンスを受け取る
 
   Future<void> genreUpdate(String genre, GenreCounter genreCounter) async {
@@ -29,8 +29,9 @@ class Firestore {
 
     if (genreCounter.count == 1) {
       int documentCount = await getDocumentCount();
-      await PersistenceService().saveGenres(genre, genreCounter);
-      final String Firstgenres = await PersistenceService().getPrevFirstGenre();
+      await GenreCount.PersistenceService().saveGenres(genre, genreCounter);
+      final String Firstgenres =
+          await GenreCount.PersistenceService().getPrevFirstGenre();
 
       await db.collection('characters').doc(documentCount.toString()).update({
         'genre': {
@@ -41,10 +42,11 @@ class Firestore {
       });
     } else if (genreCounter.count == 2) {
       int documentCount = await getDocumentCount();
-      await PersistenceService().saveGenres(genre, genreCounter);
-      final String Firstgenres = await PersistenceService().getPrevFirstGenre();
+      await GenreCount.PersistenceService().saveGenres(genre, genreCounter);
+      final String Firstgenres =
+          await GenreCount.PersistenceService().getPrevFirstGenre();
       final String Secondgenres =
-          await PersistenceService().getPrevSecondGenre();
+          await GenreCount.PersistenceService().getPrevSecondGenre();
 
       await db.collection('characters').doc(documentCount.toString()).update({
         'genre': {
@@ -54,11 +56,11 @@ class Firestore {
         },
       });
     } else if (genreCounter.count == 3) {
-      genreCounter.reset();
       int documentCount = await getDocumentCount();
-      final String Firstgenres = await PersistenceService().getPrevFirstGenre();
+      final String Firstgenres =
+          await GenreCount.PersistenceService().getPrevFirstGenre();
       final String Secondgenres =
-          await PersistenceService().getPrevSecondGenre();
+          await GenreCount.PersistenceService().getPrevSecondGenre();
       await db.collection('characters').doc(documentCount.toString()).update({
         'genre': {
           'first': Firstgenres,
@@ -66,21 +68,18 @@ class Firestore {
           'third': genre,
         },
       });
-      /*
-      await Future.delayed(Duration(seconds: 2));
-      List<String> imageUrls = await partsConnectionWidget.getImageUrls();
 
-      debugPrint(imageUrls[1]);
+      await Future.delayed(Duration(seconds: 1));
+      List<String> imageUrls =
+          await getImageUrl.PersistenceService().getPrevUrl();
 
-      String CharaImageUrl =
+      String? CharaImageUrl =
           await imageBook.uploadLocalImageToFirestore(imageUrls);
-
-      debugPrint(CharaImageUrl);
 
       await db.collection('characters').doc(documentCount.toString()).update({
         'imageUrl': CharaImageUrl,
       });
-      */
+
       await charaDataCreate();
     }
   }
@@ -116,10 +115,28 @@ class Firestore {
   }
 
   Future<void> read() async {
-    final event = await db.collection("characters").get();
-    final List<Character> _characters =
-        event.docs.map((doc) => Character.fromFirestore(doc)).toList();
-    characters = _characters;
+    final latestDocumentSnapshot = await db
+        .collection("characters")
+        .orderBy(FieldPath.documentId, descending: true)
+        .limit(1)
+        .get();
+
+    if (latestDocumentSnapshot.docs.isNotEmpty) {
+      final latestDocId = latestDocumentSnapshot.docs.first.id;
+      final latestDocNumber = int.parse(latestDocId);
+
+      final event = await db
+          .collection("characters")
+          .where(FieldPath.documentId, isLessThan: (latestDocNumber).toString())
+          .get();
+
+      final List<Character> _characters =
+          event.docs.map((doc) => Character.fromFirestore(doc)).toList();
+      characters = _characters;
+    } else {
+      // ドキュメントが存在しない場合の処理
+      print("ドキュメントが見つかりませんでした。");
+    }
   }
 
   Future<void> delete(String id) async {

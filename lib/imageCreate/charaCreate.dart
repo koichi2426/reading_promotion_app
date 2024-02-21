@@ -5,10 +5,10 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
 
-class ImageBook {
+class charaCreate {
   List<String> imageUrls = [];
 
-  uploadLocalImageToFirestore(List<String> imagePaths) async {
+  Future<String?> uploadLocalImageToFirestore(List<String> imagePaths) async {
     try {
       final recorder = ui.PictureRecorder();
       final canvas = Canvas(recorder);
@@ -81,7 +81,7 @@ class ImageBook {
       // ビットマップをバイトデータにエンコード
       final ByteData? byteData =
           await combinedImage.toByteData(format: ui.ImageByteFormat.png);
-      if (byteData == null) return; // Handle null case
+      if (byteData == null) return null; // Handle null case
       final Uint8List bytes = byteData.buffer.asUint8List();
 
       // Firebase Storage にアップロード
@@ -98,8 +98,11 @@ class ImageBook {
       final String imageUrl = await ref.getDownloadURL();
       // URLを表示
       debugPrint('Uploaded image URL: $imageUrl');
+
+      return imageUrl; // 画像URLを返す
     } catch (e) {
       print('Error uploading combined image: $e');
+      throw e; // エラーをスローする
     }
   }
 
@@ -112,5 +115,4 @@ class ImageBook {
       return Uint8List(0);
     }
   }
-
 }

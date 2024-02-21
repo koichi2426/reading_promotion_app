@@ -88,9 +88,7 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
 
         genreCounter.increment();
 
-        await CharaCrud.Firestore(
-                partsConnectionWidget: PartsConnectionWidget(genres: []))
-            .genreUpdate(genre, genreCounter);
+        CharaCrud.Firestore().genreUpdate(genre, genreCounter);
 
         print(genreCounter.count);
 
@@ -158,9 +156,7 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
 
         genreCounter.increment();
 
-        await CharaCrud.Firestore(
-                partsConnectionWidget: PartsConnectionWidget(genres: []))
-            .genreUpdate(genre, genreCounter);
+        CharaCrud.Firestore().genreUpdate(genre, genreCounter);
 
         print(genreCounter.count);
 

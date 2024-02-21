@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import '../relatedCharaData/genreCounter.dart';
-import '../imageCreate/imageBook.dart';
+import 'package:provider/provider.dart';
+import '../relatedCharaData/genreCounter.dart'; 
+import '../imageCreate/PersistenceService.dart';
 
 class PartsConnectionWidget extends StatelessWidget {
   final List<String> genres;
@@ -10,9 +11,9 @@ class PartsConnectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    final genreCounter = Provider.of<GenreCounter>(context);
     return FutureBuilder<List<String>>(
-      future: getImageUrls(),
+      future: getImageUrls(context),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator(); // データ取得中はローディングを表示
@@ -34,13 +35,15 @@ class PartsConnectionWidget extends StatelessWidget {
   }
 
   // Firebase Storageから画像URLを取得する非同期関数
-  Future<List<String>> getImageUrls() async {
+  Future<List<String>> getImageUrls(BuildContext context) async {
+    final genreCounter = Provider.of<GenreCounter>(context);
+    int count = Provider.of<GenreCounter>(context).count;
+    
     try {
       // Firebase Storageのリファレンスを取得する
       firebase_storage.Reference storageRef =
           firebase_storage.FirebaseStorage.instance.ref();
 
-      // 画像のURLを取得する
       String downloadUrl_Head =
           await storageRef.child('parts/${genres[0]}_0.png').getDownloadURL();
 
@@ -50,6 +53,16 @@ class PartsConnectionWidget extends StatelessWidget {
       String downloadUrl_foot =
           await storageRef.child('parts/${genres[2]}_2.png').getDownloadURL();
 
+      debugPrint("genreCounter: $count");
+
+      if(count == 1){
+        await PersistenceService().saveGenres(downloadUrl_Head, count);
+      }else if(count == 2){
+        await PersistenceService().saveGenres(downloadUrl_body, count);
+      }else if(count == 3){
+        genreCounter.reset();
+        await PersistenceService().saveGenres(downloadUrl_foot, count);
+      }
 
       // 画像URLをリストに追加して返す
       return [
@@ -57,6 +70,7 @@ class PartsConnectionWidget extends StatelessWidget {
         downloadUrl_body,
         downloadUrl_foot,
       ];
+
     } catch (e) {
       // エラーが発生した場合は、エラーメッセージを表示し、空のリストを返す
       print('Error fetching image URLs: $e');
