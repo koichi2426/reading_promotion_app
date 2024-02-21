@@ -96,8 +96,6 @@ class charaCreate {
 
       // 画像URLを取得
       final String imageUrl = await ref.getDownloadURL();
-      // URLを表示
-      debugPrint('Uploaded image URL: $imageUrl');
 
       return imageUrl; // 画像URLを返す
     } catch (e) {

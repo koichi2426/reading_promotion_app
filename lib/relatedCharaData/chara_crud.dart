@@ -33,7 +33,10 @@ class Firestore {
       final String Firstgenres =
           await GenreCount.PersistenceService().getPrevFirstGenre();
 
-      await db.collection('characters').doc(documentCount.toString()).update({
+      await db
+          .collection('characters')
+          .doc((documentCount).toString().padLeft(2, '0'))
+          .update({
         'genre': {
           'first': Firstgenres,
           'second': '',
@@ -48,7 +51,10 @@ class Firestore {
       final String Secondgenres =
           await GenreCount.PersistenceService().getPrevSecondGenre();
 
-      await db.collection('characters').doc(documentCount.toString()).update({
+      await db
+          .collection('characters')
+          .doc((documentCount).toString().padLeft(2, '0'))
+          .update({
         'genre': {
           'first': Firstgenres,
           'second': Secondgenres,
@@ -61,7 +67,10 @@ class Firestore {
           await GenreCount.PersistenceService().getPrevFirstGenre();
       final String Secondgenres =
           await GenreCount.PersistenceService().getPrevSecondGenre();
-      await db.collection('characters').doc(documentCount.toString()).update({
+      await db
+          .collection('characters')
+          .doc((documentCount).toString().padLeft(2, '0'))
+          .update({
         'genre': {
           'first': Firstgenres,
           'second': Secondgenres,
@@ -76,7 +85,13 @@ class Firestore {
       String? CharaImageUrl =
           await imageBook.uploadLocalImageToFirestore(imageUrls);
 
-      await db.collection('characters').doc(documentCount.toString()).update({
+      // URLを表示
+      debugPrint('Uploaded image URL: $CharaImageUrl');
+
+      await db
+          .collection('characters')
+          .doc((documentCount).toString().padLeft(2, '0'))
+          .update({
         'imageUrl': CharaImageUrl,
       });
 
@@ -98,7 +113,7 @@ class Firestore {
     final int documentCount = await getDocumentCount();
 
     // 新しいIDを生成
-    final String newDocumentId = (documentCount + 1).toString();
+    final String newDocumentId = (documentCount + 1).toString().padLeft(2, '0');
 
     // 新しいIDでドキュメントを追加
     await db.collection("characters").doc(newDocumentId).set(characterInfo);
@@ -127,12 +142,15 @@ class Firestore {
 
       final event = await db
           .collection("characters")
-          .where(FieldPath.documentId, isLessThan: (latestDocNumber).toString())
+          .where(FieldPath.documentId, isLessThan: latestDocNumber.toString())
           .get();
 
       final List<Character> _characters =
           event.docs.map((doc) => Character.fromFirestore(doc)).toList();
-      characters = _characters;
+      characters = _characters.where((character) {
+        // 最新のドキュメント以外のみを返す
+        return character.id != latestDocId;
+      }).toList();
     } else {
       // ドキュメントが存在しない場合の処理
       print("ドキュメントが見つかりませんでした。");
@@ -142,4 +160,5 @@ class Firestore {
   Future<void> delete(String id) async {
     await db.collection('characters').doc(id).delete();
   }
+  
 }

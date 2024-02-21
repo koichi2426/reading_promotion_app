@@ -54,9 +54,9 @@ class CharacterComponent extends StatelessWidget {
               ElementBarComponent(),
               PartsConnectionWidget(
                 genres: [
-                  'null',
-                  'null',
-                  'null',
+                  convertCategoryToEnglish(genre1),
+                  convertCategoryToEnglish(genre2),
+                  convertCategoryToEnglish(genre3),
                 ],
               ),
             ],
