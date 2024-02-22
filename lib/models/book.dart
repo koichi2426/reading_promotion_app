@@ -1,22 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Book {
-    final int id;
-    final String title;
-    final int categoryId;
+  final String title;
+  final String writer;
 
-    Book({
-        required this.id,
-        required this.title,
-        required this.categorieId,
-    });
+  Book({
+    required this.title,
+    required this.writer,
+  });
 
-    factory Book.fromFirestore(DocumentSnapshot doc) {
-        final data = doc.data() as Map<String, dynamic>;
-        return Book(
-            id: doc.id,
-            title: data.fromMap(data['title']),
-            categorieId: data.fromMap(data['categorieID']),
-        );
-    }
+  factory Book.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return Book(title: data['title'], writer: data['writer']);
+  }
 }

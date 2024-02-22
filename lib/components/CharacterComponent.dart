@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'CharacterDisplayWidget.dart'; // CharacterDisplayWidgetをインポート
 import 'ElementBarComponent.dart';
+import 'PartsConnectionWidget.dart';
 
 class CharacterComponent extends StatelessWidget {
   final String genre1;
@@ -11,22 +11,24 @@ class CharacterComponent extends StatelessWidget {
 
   String convertCategoryToEnglish(String category) {
     switch (category) {
-      case "総記・全般":
+      case "総記":
         return "generalities";
-      case "哲学・心理学":
-        return "philosophy-psychology";
+      case "心理学":
+        return "psychology";
       case "歴史":
         return "history";
       case "社会":
         return "socialsciences";
-      case "科学・医学":
+      case "科学医学":
         return "science-medicine";
-      case "技術・家庭":
-        return "technology-home";
+      case "技術":
+        return "technology";
       case "産業":
         return "industry";
-      case "芸術・体育":
-        return "arts-sports";
+      case "芸術":
+        return "arts";
+      case "体育":
+        return "sports";
       case "言語":
         return "language";
       case "文学":
@@ -50,11 +52,12 @@ class CharacterComponent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElementBarComponent(),
-              CharacterDisplayWidget(
-                characterImagePath: 'assets/images/character.png', // キャラクターの基本画像パス
-                headPartImagePath: (convertCategoryToEnglish(genre1) != 'null' ? pathToParts + convertCategoryToEnglish(genre1) + '_0.png' : 'null'), // 頭部パーツの画像パス
-                bodyPartImagePath: (convertCategoryToEnglish(genre2) != 'null' ? pathToParts + convertCategoryToEnglish(genre2) + '_1.png' : 'null'), // 胴体パーツの画像パス
-                legPartImagePath:  (convertCategoryToEnglish(genre3) != 'null' ? pathToParts + convertCategoryToEnglish(genre3) + '_2.png' : 'null'), // 足部パーツの画像パス
+              PartsConnectionWidget(
+                genres: [
+                  convertCategoryToEnglish(genre1),
+                  convertCategoryToEnglish(genre2),
+                  convertCategoryToEnglish(genre3),
+                ],
               ),
             ],
     );
