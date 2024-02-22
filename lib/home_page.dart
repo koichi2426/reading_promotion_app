@@ -17,6 +17,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'relatedCharaData/charaBook.dart';
+import 'components/LogoutComponent.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -55,7 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: Stack(
+        children: [
+          Container(
         decoration: BoxDecoration(
           border: Border.all(
             color: Color(0xFF5A4F3C), // #5A4F3C color
@@ -227,6 +230,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+          Positioned( // Position LogoutComponent in the top-left corner
+            top: 20.0,
+            left: 20.0,
+            child: LogoutComponent(), // Add your LogoutComponent here
+          ),
+        ],
+      )
     );
   }
 }
