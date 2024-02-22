@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'login_page.dart';
 import 'root_page.dart';
 import 'home_page.dart';
+import 'relatedCharaData/genreCounter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(new MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => GenreCounter(),
+      child: new MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
