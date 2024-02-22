@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Genre {
+class character {
   final Map<String, String> genre;
   final String imageUrl;
 
-  Genre({
+  character({
     required this.genre,
     required this.imageUrl,
   });
 
-  factory Genre.fromFirestore(DocumentSnapshot doc) {
+  factory character.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     Map<String, String> genreData = {
       'first': data['genre']['first'] as String,
@@ -17,7 +17,7 @@ class Genre {
       'third': data['genre']['third'] as String,
     };
 
-    return Genre(
+    return character(
       genre: genreData,
       imageUrl: data['imageUrl'],
     );
