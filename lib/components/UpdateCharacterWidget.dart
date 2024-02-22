@@ -16,29 +16,25 @@ class UpdateCharacterWidget extends StatelessWidget {
       return Text('ユーザーIDが設定されていません');
     }
 
-    final doc = firestore.collection('UserCharacter').doc(userid);
+    final doc = firestore.collection('users').doc('user1');
     doc.get().then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
         print('Document data: ${documentSnapshot.data()}');
-        final char = firestore.collection('characters').doc();
         // UserCharacterコレクションから最新の1件のドキュメントを取得するクエリ
-        firestore
-            .collection('UserCharacter')
-            .doc(userid)
+        final userchar = firestore
+            .collection('users')
+            .doc('user1')
             .collection('characters')
-            .orderBy('createdAt', descending: true)
-            .limit(1)
-            .get()
-            .then((QuerySnapshot querySnapshot) {
+            .snapshots()
+            .listen((QuerySnapshot querySnapshot) {
           if (querySnapshot.docs.isNotEmpty) {
-            // クエリの結果が空でない場合、最新のドキュメントのデータを処理する
-            print(
-                'Latest character document: ${querySnapshot.docs.first.data()}');
+            // ドキュメントが存在する場合の処理
+            var latestCharacter = querySnapshot.docs.last.data();
+            print('Latest character: $latestCharacter');
           } else {
-            print('No characters found');
+            // ドキュメントが存在しない場合の処理
+            print('No character found');
           }
-        }).catchError((error) {
-          print('Failed to get characters: $error');
         });
       } else {
         print('Document does not exist on the database');
@@ -50,11 +46,9 @@ class UpdateCharacterWidget extends StatelessWidget {
     try {
       return StreamBuilder<QuerySnapshot>(
         stream: firestore
-            .collection('UserCharacter')
-            .doc(userid)
+            .collection('users')
+            .doc('user1')
             .collection('characters')
-            .orderBy('createdAt', descending: true)
-            .limit(1)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
