@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Character {
+  final String id;
   final Map<String, String> genre;
   final String imageUrl;
 
   Character({
+    required this.id,
     required this.genre,
     required this.imageUrl,
   });
@@ -18,6 +20,7 @@ class Character {
     };
 
     return Character(
+      id: doc.id,
       genre: genreData,
       imageUrl: data['imageUrl'],
     );

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Book {
+  final String id;
   final String author;
   final String description;
   final String genre;
@@ -9,6 +10,7 @@ class Book {
   final String title;
 
   Book({
+    required this.id,
     required this.author,
     required this.description,
     required this.genre,
@@ -20,6 +22,7 @@ class Book {
   factory Book.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return Book(
+      id: doc.id,
       author: data['author'],
       description: data['description'],
       genre: data['genre'],
