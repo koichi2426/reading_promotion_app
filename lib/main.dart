@@ -79,10 +79,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: GestureDetector(
                     onTap: () {
                       //キャラクター図鑑を表示する chip chip chapa chapa
-                      Navigator.push(
+                        Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => charaBookPage()),
+                            builder: (context) => EncyclopediaComponent()),
                       );
                     },
                     child: Container(
@@ -185,7 +185,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   BarcodeComponent(),
                                   KindleComponent(),
-                                  //DataTestComponent(),
                                   // DataTestComponent(),
                                 ],
                               ),
