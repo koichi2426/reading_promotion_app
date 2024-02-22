@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LogoutComponent extends StatelessWidget {
-  const LogoutComponent({super.key});
+  const LogoutComponent({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: () async {
-        // Handle the button press
+        // ログアウト処理
+        print('Logout!!');
+        await FirebaseAuth.instance.signOut();
       },
       icon: Icon(
-        Icons.exit_to_app, // This is the Material icon for "logout"
-        color: Colors.white, // Assuming the arrow is white
+        Icons.exit_to_app,
+        color: Colors.white,
       ),
-      label: Text(''), // No text, just the icon
+      label: Text(''),
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent, // Set the background color to transparent
-        minimumSize: Size(0, 50), // Button minimum size
-        shape: RoundedRectangleBorder( // Assuming the button has rounded corners
-          borderRadius: BorderRadius.circular(12), // Adjust the corner radius if needed
+        backgroundColor: Colors.transparent,
+        minimumSize: Size(0, 50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
     );
