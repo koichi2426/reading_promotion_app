@@ -12,8 +12,8 @@ import 'firebase_options.dart';
 import 'relatedBookData/pictureBook.dart';
 import 'relatedCharaData/genreCounter.dart';
 import 'package:provider/provider.dart';
-
-// import 'package:reading_promotion_app/components/DataTestComponent.dart';
+import 'imageCreate/imageBook.dart';
+import 'package:reading_promotion_app/components/DataTestComponent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'relatedCharaData/charaBook.dart';
@@ -79,11 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: GestureDetector(
                     onTap: () {
                       //キャラクター図鑑を表示する chip chip chapa chapa
-                        Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EncyclopediaComponent()),
-                      );
+                      ImageBook().getImageUrlsAndUpload();
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
