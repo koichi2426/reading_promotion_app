@@ -6,9 +6,7 @@ class KindleComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () async {
-        
-      },
+      onPressed: () async {},
       style: ElevatedButton.styleFrom(
         minimumSize: Size(200, 55), // ボタンの最小サイズ
       ),

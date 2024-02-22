@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Expanded(
               child: Center(
-                child: UpdateCharacterWidget(userid),
+                child: UpdateCharacterWidget(userid: userid),
               ),
             ),
             Row(
@@ -86,7 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => charaBookPage(userid)),
+                            builder: (context) =>
+                                charaBookPage(userid: userid)),
                       );
                     },
                     child: Container(
@@ -116,7 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => pictureBookPage(userid)),
+                            builder: (context) =>
+                                pictureBookPage(userid: userid)),
                       );
                     },
                     child: Container(
@@ -187,8 +189,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  BarcodeComponent(userid),
-                                  KindleComponent(userid),
+                                  BarcodeComponent(),
+                                  KindleComponent(),
                                   //DataTestComponent(),
                                 ],
                               ),

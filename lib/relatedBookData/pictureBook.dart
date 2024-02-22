@@ -4,7 +4,8 @@ import 'books.dart';
 //import 'package:http/http.dart' as http;
 
 class pictureBookPage extends StatefulWidget {
-  const pictureBookPage({Key? key}) : super(key: key);
+  final String userid;
+  const pictureBookPage({Key? key, required this.userid}) : super(key: key);
 
   @override
   _pictureBookPageState createState() => _pictureBookPageState();

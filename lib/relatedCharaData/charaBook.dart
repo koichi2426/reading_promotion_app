@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 //import 'package:http/http.dart' as http;
 
 class charaBookPage extends StatefulWidget {
-  const charaBookPage({Key? key}) : super(key: key);
+  final String userid;
+  const charaBookPage({Key? key, required this.userid}) : super(key: key);
 
   @override
   _charaBookPageState createState() => _charaBookPageState();
