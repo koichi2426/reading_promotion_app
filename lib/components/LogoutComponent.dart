@@ -15,7 +15,7 @@ class LogoutComponent extends StatelessWidget {
       ),
       label: Text(''), // No text, just the icon
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black, // Set the background color here
+        backgroundColor: Colors.transparent, // Set the background color to transparent
         minimumSize: Size(0, 50), // Button minimum size
         shape: RoundedRectangleBorder( // Assuming the button has rounded corners
           borderRadius: BorderRadius.circular(12), // Adjust the corner radius if needed
