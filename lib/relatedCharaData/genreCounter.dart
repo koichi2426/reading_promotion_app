@@ -36,4 +36,5 @@ class GenreCounter extends ChangeNotifier {
     _count = prefs.getInt(_keyCount) ?? 0;
     notifyListeners();
   }
+  
 }

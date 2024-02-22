@@ -1,3 +1,4 @@
+/*
 import 'dart:html';
 
 import 'package:flutter/material.dart';
@@ -50,4 +51,4 @@ class DataTestComponent extends StatelessWidget {
       print('Error data: $e');
     }
   }
-}
+}*/

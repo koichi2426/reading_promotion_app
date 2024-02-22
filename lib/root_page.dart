@@ -16,10 +16,16 @@ class _RootPageState extends State<RootPage> {
     User? user = FirebaseAuth.instance.currentUser;
     if (user == null) {
       print('user not logined');
-      Navigator.pushReplacementNamed(context, "/login");
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // エラーの出ていた処理
+        Navigator.pushReplacementNamed(context, "/login");
+      });
     } else {
       print('user already login');
-      Navigator.pushReplacementNamed(context, "/home");
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // エラーの出ていた処理
+        Navigator.pushReplacementNamed(context, "/home");
+      });
     }
     super.initState();
   }
