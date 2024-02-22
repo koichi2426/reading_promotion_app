@@ -16,6 +16,8 @@ import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'relatedCharaData/charaBook.dart';
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -81,6 +83,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: GestureDetector(
                     onTap: () {
                       //キャラクター図鑑を表示する chip chip chapa chapa
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => charaBookPage()),
+                      );
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -131,6 +138,36 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
+                SizedBox(width: 40.0),
+                // Container(
+                //   margin: EdgeInsets.only(top: 80.0, right: 25),
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       /*
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //           builder: (context) => DataTestComponent(),
+                //         ),
+                //       );
+                //       */
+                //     },
+                //     child: Container(
+                //       padding:
+                //           EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                //       decoration: BoxDecoration(
+                //         color: Color.fromARGB(255, 255, 255, 155),
+                //         borderRadius: BorderRadius.circular(12.0),
+                //         border: Border.all(color: Colors.white, width: 1.0),
+                //       ),
+                //       child: Image.asset(
+                //         'assets/images/graduate_button.png',
+                //         width: 30,
+                //         height: 30,
+                //       ),
+                //     ),
+                //   ),
+                // ),
 
                 Expanded(
                   child: TextButton(
@@ -152,6 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   BarcodeComponent(),
                                   KindleComponent(),
+                                  //DataTestComponent(),
                                 ],
                               ),
                             ),
