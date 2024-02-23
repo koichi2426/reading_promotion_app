@@ -4,50 +4,55 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reading_promotion_app/components/CharacterComponent.dart';
 
-class UpdateCharacterWidget extends StatelessWidget {
+class UpdateCharacterWidget extends StatefulWidget {
   final String userid;
   const UpdateCharacterWidget({Key? key, required this.userid})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    if (userid.isEmpty) {
-      return Text('ユーザーIDが設定されていません');
+  _UpdateCharacterWidgetState createState() => _UpdateCharacterWidgetState();
+}
+
+class _UpdateCharacterWidgetState extends State<UpdateCharacterWidget> {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  late String userDocId;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserDocId();
+  }
+
+  void fetchUserDocId() async {
+    if (widget.userid.isEmpty) {
+      print('ユーザーIDが設定されていません');
+      return;
     }
 
-    final doc = firestore.collection('users').doc('user1');
-    doc.get().then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        print('Document data: ${documentSnapshot.data()}');
-        // UserCharacterコレクションから最新の1件のドキュメントを取得するクエリ
-        final userchar = firestore
-            .collection('users')
-            .doc('user1')
-            .collection('characters')
-            .snapshots()
-            .listen((QuerySnapshot querySnapshot) {
-          if (querySnapshot.docs.isNotEmpty) {
-            // ドキュメントが存在する場合の処理
-            var latestCharacter = querySnapshot.docs.last.data();
-            print('Latest character: $latestCharacter');
-          } else {
-            // ドキュメントが存在しない場合の処理
-            print('No character found');
-          }
-        });
-      } else {
-        print('Document does not exist on the database');
-      }
-    }).catchError((error) {
-      print('Failed to get document: $error');
-    });
+    final QuerySnapshot querySnapshot =
+        await firestore.collection('users').get();
+    final List<DocumentSnapshot> userDocs = querySnapshot.docs.where((doc) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      return widget.userid == data['uid'];
+    }).toList();
 
-    try {
+    if (userDocs.isNotEmpty) {
+      setState(() {
+        userDocId = userDocs[0].id;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (userDocId.isEmpty) {
+      // ユーザーIDがまだ取得されていない場合はローディングなどのウィジェットを表示
+      return CircularProgressIndicator();
+    } else {
       return StreamBuilder<QuerySnapshot>(
         stream: firestore
             .collection('users')
-            .doc('user1')
+            .doc(userDocId)
             .collection('characters')
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -72,9 +77,6 @@ class UpdateCharacterWidget extends StatelessWidget {
           }
         },
       );
-    } catch (e) {
-      print(e);
-      return Text('エラーが発生しました $e');
     }
   }
 }
