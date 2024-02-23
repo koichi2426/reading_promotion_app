@@ -20,6 +20,7 @@ class _UpdateCharacterWidgetState extends State<UpdateCharacterWidget> {
   @override
   void initState() {
     super.initState();
+    userDocId = widget.userid;
     fetchUserDocId();
   }
 

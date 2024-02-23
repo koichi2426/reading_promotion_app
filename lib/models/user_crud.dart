@@ -321,15 +321,22 @@ class CharacterCrud {
 
     if (latestDocumentSnapshot.docs.isNotEmpty) {
       final latestDocId = latestDocumentSnapshot.docs.first.id;
+      print('getid: $latestDocId');
       final latestDocNumber = int.parse(latestDocId);
 
       final event = await db
           .collection('users')
           .doc(userDocId)
           .collection("charactors")
-          .where(FieldPath.documentId, isLessThan: latestDocNumber.toString())
+          .orderBy(FieldPath.documentId, descending: false)
+          .limit(latestDocNumber - 1)
           .get();
 
+      if (event.docs.isNotEmpty) {
+        event.docs.forEach((doc) {
+          print('doc: ${doc.id}');
+        });
+      }
       // 取得したデータを Chars クラスのリストに変換して返す
       return event.docs.map((doc) => Chars.fromFirestore(doc)).toList();
     } else {

@@ -19,7 +19,7 @@ class Users {
     final charactersdata = Chars.fromFirestore(doc);
     return Users(
       id: doc.id,
-      name: data['name'],
+      name: data['name'] ?? '',
       books: booksdata,
       charactors: charactersdata,
     );
@@ -48,13 +48,13 @@ class Books {
   factory Books.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return Books(
-      id: data['id'],
-      title: data['title'],
-      author: data['author'],
-      genre: data['genre'],
-      publishedDate: data['publishedDate'],
-      description: data['description'],
-      imageUrl: data['imageUrl'],
+      id: data['id'] ?? '',
+      title: data['title'] ?? '',
+      author: data['author'] ?? '',
+      genre: data['genre'] ?? '',
+      publishedDate: data['publishedDate'] ?? '',
+      description: data['description'] ?? '',
+      imageUrl: data['imageUrl'] ?? '',
     );
   }
 }
@@ -73,14 +73,14 @@ class Chars {
   factory Chars.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     Map<String, String> genreData = {
-      'first': data['genre']['first'] as String,
-      'second': data['genre']['second'] as String,
-      'third': data['genre']['third'] as String,
+      'first': data['genre']['first'] ?? '',
+      'second': data['genre']['second'] ?? '',
+      'third': data['genre']['third'] ?? '',
     };
     return Chars(
-      id: data['id'],
+      id: data['id'] ?? '',
       genre: genreData,
-      imageUrl: data['imageUrl'],
+      imageUrl: data['imageUrl'] ?? '',
     );
   }
 }
