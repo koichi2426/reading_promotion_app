@@ -13,7 +13,6 @@ import 'package:reading_promotion_app/components/BarcodeComponent.dart';
 import 'package:reading_promotion_app/components/ElementBarComponent.dart';
 import 'package:reading_promotion_app/components/EncyclopediaComponent.dart';
 import 'package:reading_promotion_app/components/KindleComponent.dart';
-import 'package:reading_promotion_app/components/ReadComponent.dart';
 import 'package:reading_promotion_app/components/CharacterComponent.dart';
 import 'package:reading_promotion_app/components/UpdateCharacterWidget.dart';
 import 'package:reading_promotion_app/components/LogoutComponent.dart';
