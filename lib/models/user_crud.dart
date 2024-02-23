@@ -56,7 +56,7 @@ class Firestore {
 class BookCrud {
   List<Books> books = [];
   final db = FirebaseFirestore.instance;
-  late String userDocId;
+  late String userDocId = "";
 
   Future<String?> getUserDocId(String uid) async {
     try {
@@ -117,8 +117,14 @@ class BookCrud {
             .doc(userDocId)
             .collection("books")
             .get();
-        final List<Books> _books =
-            event.docs.map((doc) => Books.fromFirestore(doc)).toList();
+        final List<Books> _books = event.docs.map((doc) {
+          final data = doc.data();
+          if (data != null) {
+            return Books.fromFirestore(doc);
+          } else {
+            throw Exception("Unexpected null data encountered");
+          }
+        }).toList();
         this.books = _books;
       } else {
         print('User document ID is null or empty');

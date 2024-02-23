@@ -19,9 +19,9 @@ class _pictureBookPageState extends State<pictureBookPage> {
   @override
   void initState() {
     super.initState();
+    userid = widget.userid;
     // initStateメソッドでreadメソッドを呼び出し、データを取得する
     _fetchBooks();
-    userid = widget.userid;
   }
 
   Future<void> _fetchBooks() async {
