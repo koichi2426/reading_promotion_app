@@ -128,10 +128,20 @@ class BookCrud {
       throw Exception('Failed to read books');
     }
   }
+
+  Future<void> delete(String uid, String id) async {
+    userDocId = await getUserDocId(uid) ?? '';
+    await db
+        .collection('users')
+        .doc(userDocId)
+        .collection('books')
+        .doc(id)
+        .delete();
+  }
 }
 
 class CharacterCrud {
-  List<Characters> characters = [];
+  List<Chars> char = [];
   final db = FirebaseFirestore.instance;
   late String userDocId;
 
@@ -293,7 +303,7 @@ class CharacterCrud {
     }
   }
 
-  Future<void> getCharacters(String uid) async {
+  Future<List<Chars>> getCharacters(String uid) async {
     String userDocId = await getUserDocId(uid) ?? '';
     final latestDocumentSnapshot = await db
         .collection('users')
@@ -314,15 +324,11 @@ class CharacterCrud {
           .where(FieldPath.documentId, isLessThan: latestDocNumber.toString())
           .get();
 
-      //final List<Character> _characters =
-      //event.docs.map((doc) => Character.fromFirestore(doc)).toList();
-      //characters = _characters.where((character) {
-      // 最新のドキュメント以外のみを返す
-      //   return character.id != latestDocId;
-      // }).toList();
+      // 取得したデータを Chars クラスのリストに変換して返す
+      return event.docs.map((doc) => Chars.fromFirestore(doc)).toList();
     } else {
-      // ドキュメントが存在しない場合の処理
-      print("ドキュメントが見つかりませんでした。");
+      // データが存在しない場合は空のリストを返す
+      return [];
     }
   }
 

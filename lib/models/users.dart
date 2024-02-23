@@ -4,24 +4,24 @@ class Users {
   final String id;
   final String name;
   final Books books;
-  final Charactors characters;
+  final Chars charactors;
 
   Users({
     required this.id,
     required this.name,
     required this.books,
-    required this.characters,
+    required this.charactors,
   });
 
   factory Users.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     final booksdata = Books.fromFirestore(doc);
-    final charactersdata = Charactors.fromFirestore(doc);
+    final charactersdata = Chars.fromFirestore(doc);
     return Users(
       id: doc.id,
       name: data['name'],
       books: booksdata,
-      characters: charactersdata,
+      charactors: charactersdata,
     );
   }
 }
@@ -59,25 +59,25 @@ class Books {
   }
 }
 
-class Charactors {
+class Chars {
   final String id;
   final Map<String, String> genre;
   final String imageUrl;
 
-  Charactors({
+  Chars({
     required this.id,
     required this.genre,
     required this.imageUrl,
   });
 
-  factory Charactors.fromFirestore(DocumentSnapshot doc) {
+  factory Chars.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     Map<String, String> genreData = {
       'first': data['genre']['first'] as String,
       'second': data['genre']['second'] as String,
       'third': data['genre']['third'] as String,
     };
-    return Charactors(
+    return Chars(
       id: data['id'],
       genre: genreData,
       imageUrl: data['imageUrl'],

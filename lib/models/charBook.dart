@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'user_crud.dart' as UserCrud;
+import 'users.dart';
 import 'package:intl/intl.dart';
 //import 'package:http/http.dart' as http;
 
@@ -15,22 +16,23 @@ class charBookPage extends StatefulWidget {
 class _charaBookPageState extends State<charBookPage> {
   UserCrud.CharacterCrud charCrud = UserCrud.CharacterCrud();
 
-  final List<> chars = [];
+  late List<Chars> chars = [];
   late String userid;
 
   @override
   void initState() {
     super.initState();
-    // initStateメソッドでreadメソッドを呼び出し、データを取得する
     userid = widget.userid;
     _fetchCharacters();
   }
 
   Future<void> _fetchCharacters() async {
-    // readメソッドを呼び出してデータを取得し、booksリストを更新する
-    charCrud.getCharacters(userid);
     setState(() {
-      chars = charCrud.characters;
+      chars = []; // データをリセット
+    });
+    List<Chars> fetchedChars = await charCrud.getCharacters(userid);
+    setState(() {
+      chars = fetchedChars;
     });
   }
 
@@ -98,7 +100,7 @@ class _charaBookPageState extends State<charBookPage> {
     );
   }
 
-  showCharaDetailsDialog(BuildContext context, Characters chars) {
+  showCharaDetailsDialog(BuildContext context, Characters char) {
     // 現在の日時を取得
     DateTime now = DateTime.now();
     // 日時をフォーマット
@@ -112,7 +114,7 @@ class _charaBookPageState extends State<charBookPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "No.${chars.id}", // error
+                "No.${char.id}", // error
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24, // フォントサイズを大きくする
@@ -144,7 +146,7 @@ class _charaBookPageState extends State<charBookPage> {
                           TextButton(
                             onPressed: () async {
                               await charCrud.delete(
-                                  userid, chars.id); // id error
+                                  userid, char.id); // id error
                               _fetchCharacters();
                               Navigator.pop(context);
                               Navigator.pop(context);
@@ -168,7 +170,7 @@ class _charaBookPageState extends State<charBookPage> {
                   height: 250,
                   width: 180,
                   child: Image.network(
-                    character.imageUrl,
+                    char.imageUrl,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -179,7 +181,7 @@ class _charaBookPageState extends State<charBookPage> {
                     Column(
                       children: [
                         Text(
-                          "${character.genre}の本から誕生",
+                          "${char.genre}の本から誕生",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Divider(),
