@@ -4,13 +4,13 @@ class Users {
   final String id;
   final String name;
   final Books books;
-  final Chars characters;
+  final Chars charactors;
 
   Users({
     required this.id,
     required this.name,
     required this.books,
-    required this.characters,
+    required this.charactors,
   });
 
   factory Users.fromFirestore(DocumentSnapshot doc) {
@@ -21,7 +21,7 @@ class Users {
       id: doc.id,
       name: data['name'],
       books: booksdata,
-      characters: charactersdata,
+      charactors: charactersdata,
     );
   }
 }

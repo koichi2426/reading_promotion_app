@@ -18,11 +18,11 @@ import 'package:reading_promotion_app/components/UpdateCharacterWidget.dart';
 import 'package:reading_promotion_app/components/LogoutComponent.dart';
 
 // pages import
-//import 'package:reading_promotion_app/models/pictureBook.dart';
+import 'package:reading_promotion_app/models/pictureBook.dart';
+import 'package:reading_promotion_app/models/charBook.dart';
 
 // models import
 import 'package:reading_promotion_app/models/users.dart';
-// import 'package:reading_promotion_app/models/charBook.dart';
 import 'login_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -88,69 +88,69 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // Container(
-                  //   margin: EdgeInsets.only(top: 80.0, left: 30),
-                  //   child: GestureDetector(
-                  //     onTap: () {
-                  //       //キャラクター図鑑を表示する chip chip chapa chapa
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //             builder: (context) =>
-                  //                 charBookPage(userid: userid)),
-                  //       );
-                  //     },
-                  //     child: Container(
-                  //       padding: EdgeInsets.symmetric(
-                  //           vertical: 8.0, horizontal: 16.0), // パディングを追加
-                  //       decoration: BoxDecoration(
-                  //         color: Color.fromARGB(255, 227, 197, 155),
-                  //         borderRadius: BorderRadius.circular(12.0),
-                  //         border: Border.all(
-                  //           color: Colors.black,
-                  //           width: 1.0,
-                  //         ),
-                  //       ),
-                  //       child: Image.asset(
-                  //         'assets/images/graduate_button.png',
-                  //         width: 40, // 画像の幅
-                  //         height: 40, // 画像の高さ
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  Container(
+                    margin: EdgeInsets.only(top: 80.0, left: 30),
+                    child: GestureDetector(
+                      onTap: () {
+                        //キャラクター図鑑を表示する chip chip chapa chapa
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  charBookPage(userid: userid)),
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 16.0), // パディングを追加
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 227, 197, 155),
+                          borderRadius: BorderRadius.circular(12.0),
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 1.0,
+                          ),
+                        ),
+                        child: Image.asset(
+                          'assets/images/graduate_button.png',
+                          width: 40, // 画像の幅
+                          height: 40, // 画像の高さ
+                        ),
+                      ),
+                    ),
+                  ),
 
                   SizedBox(width: 40.0), // ボタン1とボタン2の間に余白を追加
-                  // Container(
-                  //   margin: EdgeInsets.only(top: 80.0, right: 25),
-                  //   child: GestureDetector(
-                  //     onTap: () {
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //             builder: (context) =>
-                  //                 pictureBookPage(userid: userid)),
-                  //       );
-                  //     },
-                  //     child: Container(
-                  //       padding: EdgeInsets.symmetric(
-                  //           vertical: 8.0, horizontal: 16.0), // パディングを追加
-                  //       decoration: BoxDecoration(
-                  //         color: Color.fromARGB(255, 227, 197, 155),
-                  //         borderRadius: BorderRadius.circular(12.0),
-                  //         border: Border.all(
-                  //           color: Colors.black,
-                  //           width: 1.0,
-                  //         ),
-                  //       ),
-                  //       child: Image.asset(
-                  //         'assets/images/pictureBook.png',
-                  //         width: 40, // 画像の幅
-                  //         height: 40, // 画像の高さ
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  Container(
+                    margin: EdgeInsets.only(top: 80.0, right: 25),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  pictureBookPage(userid: userid)),
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 16.0), // パディングを追加
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 227, 197, 155),
+                          borderRadius: BorderRadius.circular(12.0),
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 1.0,
+                          ),
+                        ),
+                        child: Image.asset(
+                          'assets/images/pictureBook.png',
+                          width: 40, // 画像の幅
+                          height: 40, // 画像の高さ
+                        ),
+                      ),
+                    ),
+                  ),
 
                   SizedBox(width: 40.0),
 
