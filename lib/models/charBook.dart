@@ -15,7 +15,7 @@ class charBookPage extends StatefulWidget {
 class _charaBookPageState extends State<charBookPage> {
   UserCrud.CharacterCrud charCrud = UserCrud.CharacterCrud();
 
-  late List<Characters> character;
+  final List<> chars = [];
   late String userid;
 
   @override
@@ -30,7 +30,7 @@ class _charaBookPageState extends State<charBookPage> {
     // readメソッドを呼び出してデータを取得し、booksリストを更新する
     charCrud.getCharacters(userid);
     setState(() {
-      character = charCrud.characters;
+      chars = charCrud.characters;
     });
   }
 
@@ -51,10 +51,10 @@ class _charaBookPageState extends State<charBookPage> {
       backgroundColor: Color(0xFFF5DEB3), // 薄い茶色の背景色
       body: GridView.count(
         crossAxisCount: 2,
-        children: ((character) {
+        children: ((chars) {
           return GestureDetector(
             onTap: () {
-              showCharaDetailsDialog(context, character);
+              showCharaDetailsDialog(context, chars);
             },
             child: Container(
               margin: EdgeInsets.all(8), // コンテナの外側の余白を追加
@@ -82,7 +82,7 @@ class _charaBookPageState extends State<charBookPage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10), // 画像の角丸
                         image: DecorationImage(
-                          image: NetworkImage(character.imageUrl),
+                          image: NetworkImage(chars.imageUrl),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -98,7 +98,7 @@ class _charaBookPageState extends State<charBookPage> {
     );
   }
 
-  showCharaDetailsDialog(BuildContext context, Characters character) {
+  showCharaDetailsDialog(BuildContext context, Characters chars) {
     // 現在の日時を取得
     DateTime now = DateTime.now();
     // 日時をフォーマット
@@ -112,7 +112,7 @@ class _charaBookPageState extends State<charBookPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "No.${character.id}", // error
+                "No.${chars.id}", // error
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24, // フォントサイズを大きくする
@@ -144,7 +144,7 @@ class _charaBookPageState extends State<charBookPage> {
                           TextButton(
                             onPressed: () async {
                               await charCrud.delete(
-                                  userid, character.id); // id error
+                                  userid, chars.id); // id error
                               _fetchCharacters();
                               Navigator.pop(context);
                               Navigator.pop(context);
