@@ -180,7 +180,7 @@ class _charaBookPageState extends State<charBookPage> {
                     Column(
                       children: [
                         Text(
-                          "${char.genre}の本から誕生",
+                          "${char.genre['first']} , ${char.genre['second']}, ${char.genre['third']}の本から誕生",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Divider(),
