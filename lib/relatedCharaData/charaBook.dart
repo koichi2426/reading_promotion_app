@@ -115,44 +115,6 @@ class _charaBookPageState extends State<charaBookPage> {
                   fontSize: 24, // フォントサイズを大きくする
                 ),
               ),
-              IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "図鑑から削除しますか？",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text("いいえ"),
-                          ),
-                          TextButton(
-                            onPressed: () async {
-                              await firestore.delete(character.id);
-                              _fetchCharacters();
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                            },
-                            child: Text("はい"),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-              ),
             ],
           ),
           content: SingleChildScrollView(
