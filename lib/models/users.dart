@@ -78,7 +78,7 @@ class Chars {
       'third': data['genre']['third'] ?? '',
     };
     return Chars(
-      id: data['id'] ?? '',
+       id: doc.id,
       genre: genreData,
       imageUrl: data['imageUrl'] ?? '',
     );
