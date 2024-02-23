@@ -5,9 +5,8 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'dart:convert';
 import '../relatedBookData/crud.dart';
 import '../relatedBookData/gptApi.dart';
-import '../relatedBookData/crud.dart' as BookCrud;
-import '../relatedCharaData/chara_crud.dart' as CharaCrud;
-import '../relatedCharaData/genreCounter.dart';
+import '../models/user_crud.dart' as UserCrud;
+import '../models/genreCounter.dart';
 import 'package:provider/provider.dart';
 import '../components/PartsConnectionWidget.dart';
 

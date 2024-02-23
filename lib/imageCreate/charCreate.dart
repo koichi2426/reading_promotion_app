@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
 
-class charaCreate {
+class charCreate {
   List<String> imageUrls = [];
 
   Future<String?> uploadLocalImageToFirestore(List<String> imagePaths) async {

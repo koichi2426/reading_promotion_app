@@ -19,7 +19,7 @@ import 'package:reading_promotion_app/components/UpdateCharacterWidget.dart';
 import 'package:reading_promotion_app/components/LogoutComponent.dart';
 
 // pages import
-// import 'package:reading_promotion_app/models/pictureBook.dart';
+//import 'package:reading_promotion_app/models/pictureBook.dart';
 
 // models import
 import 'package:reading_promotion_app/models/users.dart';
@@ -29,13 +29,10 @@ import 'login_page.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-      routes: <String, WidgetBuilder>{
-        '/login': (BuildContext context) => LoginPage(),
-        '/home': (BuildContext context) => HomePage(),
-      }
-    );
+    return MaterialApp(home: MyHomePage(), routes: <String, WidgetBuilder>{
+      '/login': (BuildContext context) => LoginPage(),
+      '/home': (BuildContext context) => HomePage(),
+    });
   }
 }
 
@@ -123,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   //     ),
                   //   ),
                   // ),
-                 
+
                   SizedBox(width: 40.0), // ボタン1とボタン2の間に余白を追加
                   // Container(
                   //   margin: EdgeInsets.only(top: 80.0, right: 25),
@@ -155,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   //     ),
                   //   ),
                   // ),
-                  
+
                   SizedBox(width: 40.0),
 
                   Expanded(
