@@ -163,14 +163,14 @@ class CharacterCrud {
 
       CollectionReference charRef =
           db.collection("users").doc(userDocId).collection("characters");
-      int documentCount = await getDocumentCount();
+      int documentCount = await getDocumentCount(uid);
 
       if (documentCount == 0) {
-        await charDataCreate();
+        await charDataCreate(userDocId);
       }
 
       if (genreCounter.count == 1) {
-        documentCount = await getDocumentCount();
+        documentCount = await getDocumentCount(uid);
         await GenreCount.PersistenceService().saveGenres(genre, genreCounter);
         final String Firstgenres =
             await GenreCount.PersistenceService().getPrevFirstGenre();
@@ -188,7 +188,7 @@ class CharacterCrud {
           },
         });
       } else if (genreCounter.count == 2) {
-        int documentCount = await getDocumentCount();
+        int documentCount = await getDocumentCount(uid);
         await GenreCount.PersistenceService().saveGenres(genre, genreCounter);
         final String Firstgenres =
             await GenreCount.PersistenceService().getPrevFirstGenre();
@@ -208,7 +208,7 @@ class CharacterCrud {
           },
         });
       } else if (genreCounter.count == 3) {
-        int documentCount = await getDocumentCount();
+        int documentCount = await getDocumentCount(uid);
         final String Firstgenres =
             await GenreCount.PersistenceService().getPrevFirstGenre();
         final String Secondgenres =
@@ -245,14 +245,15 @@ class CharacterCrud {
           'imageUrl': CharaImageUrl,
         });
 
-        await charDataCreate();
+        await charDataCreate(uid);
       }
     } catch (e) {
       print('Error in genreUpdate: $e');
     }
   }
 
-  Future<void> charDataCreate() async {
+  Future<void> charDataCreate(String uid) async {
+    String userDocId = await getUserDocId(uid) ?? '';
     final Map<String, dynamic> characterInfo = {
       'genre': {
         'first': '',
@@ -263,7 +264,7 @@ class CharacterCrud {
     };
 
     // ドキュメント合計数を取得
-    final int documentCount = await getDocumentCount();
+    final int documentCount = await getDocumentCount(uid);
 
     // 新しいIDを生成
     final String newDocumentId = (documentCount + 1).toString().padLeft(2, '0');
@@ -277,7 +278,8 @@ class CharacterCrud {
         .set(characterInfo);
   }
 
-  Future<int> getDocumentCount() async {
+  Future<int> getDocumentCount(String uid) async {
+    String userDocId = await getUserDocId(uid) ?? '';
     try {
       final snapshot = await db
           .collection('users')
@@ -291,7 +293,8 @@ class CharacterCrud {
     }
   }
 
-  Future<void> read() async {
+  Future<void> getCharacters(String uid) async {
+    String userDocId = await getUserDocId(uid) ?? '';
     final latestDocumentSnapshot = await db
         .collection('users')
         .doc(userDocId)
@@ -323,7 +326,8 @@ class CharacterCrud {
     }
   }
 
-  Future<void> delete(String id) async {
+  Future<void> delete(String uid, String id) async {
+    String userDocId = await getUserDocId(uid) ?? '';
     await db
         .collection('users')
         .doc(userDocId)
