@@ -173,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    BarcodeComponent(),
+                                    BarcodeComponent(userid: userid),
                                     //KindleComponent(),
                                   ],
                                 ),

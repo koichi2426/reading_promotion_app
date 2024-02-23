@@ -3,7 +3,8 @@ import 'package:reading_promotion_app/components/BarcodeComponent.dart';
 import 'package:reading_promotion_app/components/KindleComponent.dart';
 
 class ReadComponent extends StatelessWidget {
-  const ReadComponent({Key? key}) : super(key: key);
+  String userid;
+  const ReadComponent({Key? key, required this.userid}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,9 @@ class ReadComponent extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    BarcodeComponent(),
+                    BarcodeComponent(
+                      userid: userid,
+                    ),
                     KindleComponent(),
                   ],
                 ),
