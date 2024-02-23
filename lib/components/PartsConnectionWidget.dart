@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:provider/provider.dart';
-import '../relatedCharaData/genreCounter.dart'; 
+import '../models/genreCounter.dart';
 import '../imageCreate/PersistenceService.dart';
 
 class PartsConnectionWidget extends StatelessWidget {
@@ -38,7 +38,7 @@ class PartsConnectionWidget extends StatelessWidget {
   Future<List<String>> getImageUrls(BuildContext context) async {
     final genreCounter = Provider.of<GenreCounter>(context);
     int count = Provider.of<GenreCounter>(context).count;
-    
+
     try {
       // Firebase Storageのリファレンスを取得する
       firebase_storage.Reference storageRef =
@@ -55,11 +55,11 @@ class PartsConnectionWidget extends StatelessWidget {
 
       debugPrint("genreCounter: $count");
 
-      if(count == 1){
+      if (count == 1) {
         await PersistenceService().saveGenres(downloadUrl_Head, count);
-      }else if(count == 2){
+      } else if (count == 2) {
         await PersistenceService().saveGenres(downloadUrl_body, count);
-      }else if(count == 3){
+      } else if (count == 3) {
         genreCounter.reset();
         await PersistenceService().saveGenres(downloadUrl_foot, count);
       }
@@ -70,7 +70,6 @@ class PartsConnectionWidget extends StatelessWidget {
         downloadUrl_body,
         downloadUrl_foot,
       ];
-
     } catch (e) {
       // エラーが発生した場合は、エラーメッセージを表示し、空のリストを返す
       print('Error fetching image URLs: $e');

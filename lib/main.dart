@@ -7,19 +7,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'login_page.dart';
 import 'root_page.dart';
 import 'home_page.dart';
-import 'relatedCharaData/genreCounter.dart';
+import 'models/genreCounter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => GenreCounter(),
-      child: new MyApp(),
-    )
-  );
+  runApp(ChangeNotifierProvider(
+    create: (_) => GenreCounter(),
+    child: new MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

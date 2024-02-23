@@ -19,22 +19,18 @@ import 'package:reading_promotion_app/components/UpdateCharacterWidget.dart';
 import 'package:reading_promotion_app/components/LogoutComponent.dart';
 
 // pages import
-import 'package:reading_promotion_app/models/pictureBook.dart';
+//import 'package:reading_promotion_app/models/pictureBook.dart';
 
 // models import
 import 'package:reading_promotion_app/models/users.dart';
-import 'package:reading_promotion_app/models/charBook.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-      routes: <String, WidgetBuilder>{
-        '/login': (BuildContext context) => LoginPage(),
-        '/home': (BuildContext context) => HomePage(),
-      }
-    );
+    return MaterialApp(home: MyHomePage(), routes: <String, WidgetBuilder>{
+      '/login': (BuildContext context) => LoginPage(),
+      '/home': (BuildContext context) => HomePage(),
+    });
   }
 }
 
