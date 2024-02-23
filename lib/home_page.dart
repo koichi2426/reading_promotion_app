@@ -18,12 +18,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'relatedCharaData/charaBook.dart';
 import 'components/LogoutComponent.dart';
+import 'login_page.dart';
+import 'home_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
+      routes: <String, WidgetBuilder>{
+        '/login': (BuildContext context) => LoginPage(),
+        '/home': (BuildContext context) => HomePage(),
+      }
     );
   }
 }

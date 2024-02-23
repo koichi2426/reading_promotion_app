@@ -11,6 +11,7 @@ class LogoutComponent extends StatelessWidget {
         // ログアウト処理
         print('Logout!!');
         await FirebaseAuth.instance.signOut();
+        Navigator.pushReplacementNamed(context, "/login");
       },
       icon: Icon(
         Icons.exit_to_app,
