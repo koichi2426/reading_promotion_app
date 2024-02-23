@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+
+// firebase import
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'firebase_options.dart';
+import 'package:provider/provider.dart';
+
+// components import
 import 'package:reading_promotion_app/components/AlumniComponent.dart';
 import 'package:reading_promotion_app/components/BarcodeComponent.dart';
 import 'package:reading_promotion_app/components/ElementBarComponent.dart';
@@ -7,17 +16,14 @@ import 'package:reading_promotion_app/components/KindleComponent.dart';
 import 'package:reading_promotion_app/components/ReadComponent.dart';
 import 'package:reading_promotion_app/components/CharacterComponent.dart';
 import 'package:reading_promotion_app/components/UpdateCharacterWidget.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'relatedBookData/pictureBook.dart';
-import 'relatedCharaData/genreCounter.dart';
-import 'package:provider/provider.dart';
+import 'package:reading_promotion_app/components/LogoutComponent.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// pages import
+import 'package:reading_promotion_app/models/pictureBook.dart';
 
-import 'models/charBook.dart';
-import 'components/LogoutComponent.dart';
+// models import
+import 'package:reading_promotion_app/models/users.dart';
+import 'package:reading_promotion_app/models/charBook.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -144,35 +150,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   SizedBox(width: 40.0),
-                  // Container(
-                  //   margin: EdgeInsets.only(top: 80.0, right: 25),
-                  //   child: GestureDetector(
-                  //     onTap: () {
-                  //       /*
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //           builder: (context) => DataTestComponent(),
-                  //         ),
-                  //       );
-                  //       */
-                  //     },
-                  //     child: Container(
-                  //       padding:
-                  //           EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                  //       decoration: BoxDecoration(
-                  //         color: Color.fromARGB(255, 255, 255, 155),
-                  //         borderRadius: BorderRadius.circular(12.0),
-                  //         border: Border.all(color: Colors.white, width: 1.0),
-                  //       ),
-                  //       child: Image.asset(
-                  //         'assets/images/graduate_button.png',
-                  //         width: 30,
-                  //         height: 30,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
 
                   Expanded(
                     child: TextButton(
@@ -193,8 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     BarcodeComponent(),
-                                    KindleComponent(),
-                                    //DataTestComponent(),
+                                    //KindleComponent(),
                                   ],
                                 ),
                               ),
