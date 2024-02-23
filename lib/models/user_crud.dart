@@ -25,8 +25,6 @@ class Firestore {
     await usersRef.doc(userid).set({
       'name': userName,
       'uid': userid,
-      'books': {},
-      'charactors': {},
     });
   }
 
