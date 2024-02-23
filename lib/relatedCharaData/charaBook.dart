@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'chara_crud.dart';
-import 'characters.dart';
 import 'package:intl/intl.dart';
 //import 'package:http/http.dart' as http;
 

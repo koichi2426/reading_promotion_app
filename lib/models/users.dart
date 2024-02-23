@@ -1,10 +1,12 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Users {
   final String id;
   final String name;
-  final List<Books> books;
-  final List<Characters> characters;
+  final Books books;
+  final Chars characters;
 
   Users({
     required this.id,
@@ -15,15 +17,13 @@ class Users {
 
   factory Users.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
+    final booksdata = Books.fromFirestore(doc);
+    final charactersdata = Chars.fromFirestore(doc);
     return Users(
       id: doc.id,
       name: data['name'],
-      books: (data['books'] as List)
-          .map((book) => Books.fromFirestore(book))
-          .toList(),
-      characters: (data['characters'] as List)
-          .map((character) => Characters.fromFirestore(character))
-          .toList(),
+      books: booksdata,
+      characters: charactersdata,
     );
   }
 }
@@ -33,45 +33,54 @@ class Books {
   final String title;
   final String author;
   final String genre;
+  final String publishedDate;
+  final String description;
+  final String imageUrl;
 
   Books({
     required this.id,
     required this.title,
     required this.author,
     required this.genre,
+    required this.publishedDate,
+    required this.description,
+    required this.imageUrl,
   });
 
   factory Books.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return Books(
-      id: doc.id,
+      id: data['id'],
       title: data['title'],
       author: data['author'],
       genre: data['genre'],
+      publishedDate: data['publishedDate'],
+      description: data['description'],
+      imageUrl: data['imageUrl'],
     );
   }
 }
 
-class Characters {
+class Chars {
   final String id;
   final Map<String, String> genre;
   final String imageUrl;
 
-  Characters({
+  Chars({
     required this.id,
     required this.genre,
     required this.imageUrl,
   });
 
-  factory Characters.fromFirestore(DocumentSnapshot doc) {
+  factory Chars.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     Map<String, String> genreData = {
       'first': data['genre']['first'] as String,
       'second': data['genre']['second'] as String,
       'third': data['genre']['third'] as String,
     };
-    return Characters(
-      id: doc.id,
+    return Chars(
+      id: data['id'],
       genre: genreData,
       imageUrl: data['imageUrl'],
     );
