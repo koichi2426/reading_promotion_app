@@ -1,20 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Character {
-  final String head;
-  final String body;
-  final String hand;
+  final String id;
+  final Map<String, String> genre;
+  final String imageUrl;
 
   Character({
-    required this.head,
-    required this.body,
-    required this.hand,
+    required this.id,
+    required this.genre,
+    required this.imageUrl,
   });
 
   factory Character.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
+    Map<String, String> genreData = {
+      'first': data['genre']['first'] as String,
+      'second': data['genre']['second'] as String,
+      'third': data['genre']['third'] as String,
+    };
 
     return Character(
-        head: data['head'], body: data['body'], hand: data['hand']);
+      id: doc.id,
+      genre: genreData,
+      imageUrl: data['imageUrl'],
+    );
   }
 }

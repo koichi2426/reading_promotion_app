@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Category {
+class User {
+  final String id;
   final String name;
 
-  Category({
+  User({
+    required this.id,
     required this.name,
   });
 
-  factory Category.fromFirestore(DocumentSnapshot doc) {
+  factory User.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    return Category(name: data['name']);
+    return User(id: doc.id, name: data['name']);
   }
 }
