@@ -53,7 +53,7 @@ class _UpdateCharacterWidgetState extends State<UpdateCharacterWidget> {
         stream: firestore
             .collection('users')
             .doc(userDocId)
-            .collection('characters')
+            .collection('charactors')
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {

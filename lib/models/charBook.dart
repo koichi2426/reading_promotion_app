@@ -53,10 +53,10 @@ class _charaBookPageState extends State<charBookPage> {
       backgroundColor: Color(0xFFF5DEB3), // 薄い茶色の背景色
       body: GridView.count(
         crossAxisCount: 2,
-        children: ((chars) {
+        children: chars.map((char) {
           return GestureDetector(
             onTap: () {
-              showCharaDetailsDialog(context, chars);
+              showCharaDetailsDialog(context, char);
             },
             child: Container(
               margin: EdgeInsets.all(8), // コンテナの外側の余白を追加
@@ -84,7 +84,7 @@ class _charaBookPageState extends State<charBookPage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10), // 画像の角丸
                         image: DecorationImage(
-                          image: NetworkImage(chars.imageUrl),
+                          image: NetworkImage(char.imageUrl),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -100,7 +100,7 @@ class _charaBookPageState extends State<charBookPage> {
     );
   }
 
-  showCharaDetailsDialog(BuildContext context, Characters char) {
+  showCharaDetailsDialog(BuildContext context, Chars char) {
     // 現在の日時を取得
     DateTime now = DateTime.now();
     // 日時をフォーマット
@@ -114,7 +114,7 @@ class _charaBookPageState extends State<charBookPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "No.${char.id}", // error
+                "No.${char.id}",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24, // フォントサイズを大きくする
@@ -145,8 +145,7 @@ class _charaBookPageState extends State<charBookPage> {
                           ),
                           TextButton(
                             onPressed: () async {
-                              await charCrud.delete(
-                                  userid, char.id); // id error
+                              await charCrud.delete(userid, char.id);
                               _fetchCharacters();
                               Navigator.pop(context);
                               Navigator.pop(context);

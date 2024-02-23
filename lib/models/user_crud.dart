@@ -26,7 +26,7 @@ class Firestore {
       'name': userName,
       'uid': userid,
       'books': {},
-      'characters': {},
+      'charactors': {},
     });
   }
 
@@ -39,7 +39,7 @@ class Firestore {
     await db.collection("users").doc(newDocumentId).set({
       'name': 'User',
       'books': {},
-      'characters': {},
+      'charactors': {},
     });
   }
 
@@ -172,7 +172,7 @@ class CharacterCrud {
       userDocId = await getUserDocId(uid) ?? '';
 
       CollectionReference charRef =
-          db.collection("users").doc(userDocId).collection("characters");
+          db.collection("users").doc(userDocId).collection("charactors");
       int documentCount = await getDocumentCount(uid);
 
       if (documentCount == 0) {
@@ -188,7 +188,7 @@ class CharacterCrud {
         await db
             .collection('users')
             .doc(userDocId)
-            .collection('characters')
+            .collection('charactors')
             .doc((documentCount).toString().padLeft(2, '0'))
             .update({
           'genre': {
@@ -208,7 +208,7 @@ class CharacterCrud {
         await db
             .collection('users')
             .doc(userDocId)
-            .collection('characters')
+            .collection('charactors')
             .doc((documentCount).toString().padLeft(2, '0'))
             .update({
           'genre': {
@@ -226,7 +226,7 @@ class CharacterCrud {
         await db
             .collection('users')
             .doc(userDocId)
-            .collection('characters')
+            .collection('charactors')
             .doc((documentCount).toString().padLeft(2, '0'))
             .update({
           'genre': {
@@ -249,7 +249,7 @@ class CharacterCrud {
         await db
             .collection('users')
             .doc(userDocId)
-            .collection('characters')
+            .collection('charactors')
             .doc((documentCount).toString().padLeft(2, '0'))
             .update({
           'imageUrl': CharaImageUrl,
@@ -283,7 +283,7 @@ class CharacterCrud {
     await db
         .collection('users')
         .doc(userDocId)
-        .collection('characters')
+        .collection('charactors')
         .doc(newDocumentId)
         .set(characterInfo);
   }
@@ -294,7 +294,7 @@ class CharacterCrud {
       final snapshot = await db
           .collection('users')
           .doc(userDocId)
-          .collection("characters")
+          .collection("charactors")
           .get();
       return snapshot.size;
     } catch (error) {
@@ -308,7 +308,7 @@ class CharacterCrud {
     final latestDocumentSnapshot = await db
         .collection('users')
         .doc(userDocId)
-        .collection("characters")
+        .collection("charactors")
         .orderBy(FieldPath.documentId, descending: true)
         .limit(1)
         .get();
@@ -320,7 +320,7 @@ class CharacterCrud {
       final event = await db
           .collection('users')
           .doc(userDocId)
-          .collection("characters")
+          .collection("charactors")
           .where(FieldPath.documentId, isLessThan: latestDocNumber.toString())
           .get();
 
@@ -337,7 +337,7 @@ class CharacterCrud {
     await db
         .collection('users')
         .doc(userDocId)
-        .collection('characters')
+        .collection('charactors')
         .doc(id)
         .delete();
   }
