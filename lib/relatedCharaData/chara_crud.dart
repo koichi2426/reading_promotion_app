@@ -8,7 +8,7 @@ import '../components/PartsConnectionWidget.dart';
 import '../imageCreate/charaCreate.dart';
 
 class Firestore {
-  List<Character> characters = [];
+  //List<Character> characters = [];
   final db = FirebaseFirestore.instance;
 
   charaCreate imageBook = charaCreate();
@@ -145,12 +145,12 @@ class Firestore {
           .where(FieldPath.documentId, isLessThan: latestDocNumber.toString())
           .get();
 
-      final List<Character> _characters =
-          event.docs.map((doc) => Character.fromFirestore(doc)).toList();
-      characters = _characters.where((character) {
+      //final List<Character> _characters =
+          //event.docs.map((doc) => Character.fromFirestore(doc)).toList();
+      //characters = _characters.where((character) {
         // 最新のドキュメント以外のみを返す
-        return character.id != latestDocId;
-      }).toList();
+      //   return character.id != latestDocId;
+      // }).toList();
     } else {
       // ドキュメントが存在しない場合の処理
       print("ドキュメントが見つかりませんでした。");
@@ -160,5 +160,4 @@ class Firestore {
   Future<void> delete(String id) async {
     await db.collection('characters').doc(id).delete();
   }
-  
 }
