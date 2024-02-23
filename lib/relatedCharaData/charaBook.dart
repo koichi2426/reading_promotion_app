@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'chara_crud.dart';
 import 'package:intl/intl.dart';
-//import 'package:http/http.dart' as http;
+import 'characters.dart';
+
+// import 'package:http/http.dart' as http;
 
 class charaBookPage extends StatefulWidget {
   final String userid;
