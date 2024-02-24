@@ -1,5 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'char_crud.dart';
+import 'user_crud.dart' as UserCrud;
 import 'users.dart';
 import 'package:intl/intl.dart';
 //import 'package:http/http.dart' as http;
@@ -12,50 +13,26 @@ class charBookPage extends StatefulWidget {
   _charaBookPageState createState() => _charaBookPageState();
 }
 
+class _charaBookPageState extends State<charBookPage> {
+  UserCrud.CharacterCrud charCrud = UserCrud.CharacterCrud();
+
+  late List<Chars> chars = [];
+  late String userid;
 
   @override
   void initState() {
     super.initState();
-    // initStateメソッドでfetchCharactersメソッドを呼び出し、データを取得する
-    fetchCharacters();
-  }
-
-  Future<void> fetchCharacters() async {
-    // firestoreCRUDのreadメソッドを呼び出してデータを取得し、characterリストを更新する
-    List<Characters> characters = await firestoreCRUD.readCharacters();
-    setState(() {
-      character = characters;
-    });
-  }
-
-  // 省略...
-
-  @override
-  Widget build(BuildContext context) {
-    // 省略...
-  }
-}
-class _charaBookPageState extends State<charBookPage> {
-  List<Characters> character = [];
-  Firestore firestore = Firestore();
-  CRUD firestoreCRUD = CRUD(); // char_crud.dartのCRUDクラスのインスタンスを作成
-
-class _charaBookPageState extends State<charBookPage> {
-  List<Characters> character = [];
-  Firestore firestore = Firestore();
-
-  @override
-  void initState() {
-    super.initState();
-    // initStateメソッドでreadメソッドを呼び出し、データを取得する
+    userid = widget.userid;
     _fetchCharacters();
   }
 
   Future<void> _fetchCharacters() async {
-    // readメソッドを呼び出してデータを取得し、booksリストを更新する
-    await firestore.read();
     setState(() {
-      character = firestore.characters;
+      chars = []; // データをリセット
+    });
+    List<Chars> fetchedChars = await charCrud.getCharacters(userid);
+    setState(() {
+      chars = fetchedChars;
     });
   }
 
@@ -76,10 +53,10 @@ class _charaBookPageState extends State<charBookPage> {
       backgroundColor: Color(0xFFF5DEB3), // 薄い茶色の背景色
       body: GridView.count(
         crossAxisCount: 2,
-        children: character.map((character) {
+        children: chars.map((char) {
           return GestureDetector(
             onTap: () {
-              showCharaDetailsDialog(context, character);
+              showCharaDetailsDialog(context, char);
             },
             child: Container(
               margin: EdgeInsets.all(8), // コンテナの外側の余白を追加
@@ -107,7 +84,7 @@ class _charaBookPageState extends State<charBookPage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10), // 画像の角丸
                         image: DecorationImage(
-                          image: NetworkImage(character.imageUrl),
+                          image: NetworkImage(char.imageUrl),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -118,12 +95,12 @@ class _charaBookPageState extends State<charBookPage> {
               ),
             ),
           );
-        }).toList(),
+        }).toList(), //error
       ),
     );
   }
 
-  showCharaDetailsDialog(BuildContext context, Characters characters) {
+  showCharaDetailsDialog(BuildContext context, Chars char) {
     // 現在の日時を取得
     DateTime now = DateTime.now();
     // 日時をフォーマット
@@ -137,7 +114,7 @@ class _charaBookPageState extends State<charBookPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "No.${characters.id}",
+                "No.${char.id}",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24, // フォントサイズを大きくする
@@ -168,7 +145,7 @@ class _charaBookPageState extends State<charBookPage> {
                           ),
                           TextButton(
                             onPressed: () async {
-                              await firestore.delete(characters.id);
+                              await charCrud.delete(userid, char.id);
                               _fetchCharacters();
                               Navigator.pop(context);
                               Navigator.pop(context);
@@ -192,7 +169,7 @@ class _charaBookPageState extends State<charBookPage> {
                   height: 250,
                   width: 180,
                   child: Image.network(
-                    characters.imageUrl,
+                    char.imageUrl,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -203,7 +180,7 @@ class _charaBookPageState extends State<charBookPage> {
                     Column(
                       children: [
                         Text(
-                          "${characters.genre}の本から誕生",
+                          "${char.genre['first']} , ${char.genre['second']}, ${char.genre['third']}の本から誕生",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Divider(),

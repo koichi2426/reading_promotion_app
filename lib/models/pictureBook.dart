@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'crud.dart';
-import 'books.dart';
+import './user_crud.dart' as UserCrud;
+import './users.dart';
 //import 'package:http/http.dart' as http;
 
 class pictureBookPage extends StatefulWidget {
@@ -13,18 +13,20 @@ class pictureBookPage extends StatefulWidget {
 
 class _pictureBookPageState extends State<pictureBookPage> {
   List<Books> books = [];
-  Firestore firestore = Firestore();
+  UserCrud.BookCrud firestore = UserCrud.BookCrud();
+  late String userid;
 
   @override
   void initState() {
     super.initState();
+    userid = widget.userid;
     // initStateメソッドでreadメソッドを呼び出し、データを取得する
     _fetchBooks();
   }
 
   Future<void> _fetchBooks() async {
     // readメソッドを呼び出してデータを取得し、booksリストを更新する
-    await firestore.read();
+    await firestore.getBooks(userid);
     setState(() {
       books = firestore.books;
     });
@@ -138,7 +140,7 @@ class _pictureBookPageState extends State<pictureBookPage> {
                           ),
                           TextButton(
                             onPressed: () async {
-                              await firestore.delete(book.id);
+                              await firestore.delete(userid, book.id);
                               _fetchBooks();
                               Navigator.pop(context);
                               Navigator.pop(context);

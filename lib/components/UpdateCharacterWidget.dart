@@ -1,5 +1,5 @@
 import 'dart:ffi';
-
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reading_promotion_app/components/CharacterComponent.dart';
@@ -20,6 +20,7 @@ class _UpdateCharacterWidgetState extends State<UpdateCharacterWidget> {
   @override
   void initState() {
     super.initState();
+    userDocId = widget.userid;
     fetchUserDocId();
   }
 
@@ -53,7 +54,7 @@ class _UpdateCharacterWidgetState extends State<UpdateCharacterWidget> {
         stream: firestore
             .collection('users')
             .doc(userDocId)
-            .collection('characters')
+            .collection('charactors')
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
@@ -73,7 +74,23 @@ class _UpdateCharacterWidgetState extends State<UpdateCharacterWidget> {
                 genre2: data['genre']['second'],
                 genre3: data['genre']['third']);
           } else {
-            return Text('キャラクターが見つかりませんでした');
+            return FutureBuilder<String>(
+              future: firebase_storage.FirebaseStorage.instance
+                  .ref()
+                  .child('parts/character_black.png')
+                  .getDownloadURL(),
+              builder:
+                  (BuildContext context, AsyncSnapshot<String> urlSnapshot) {
+                if (urlSnapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                }
+                if (urlSnapshot.hasError) {
+                  return Text('Error');
+                }
+                String downloadUrl = urlSnapshot.data ?? '';
+                return Image.network(downloadUrl);
+              },
+            );
           }
         },
       );

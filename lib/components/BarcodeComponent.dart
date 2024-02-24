@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:reading_promotion_app/imageCreate/charCreate.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'dart:convert';
 import '../relatedBookData/crud.dart';
 import '../relatedBookData/gptApi.dart';
-import '../relatedBookData/crud.dart' as BookCrud;
-import '../relatedCharaData/chara_crud.dart' as CharaCrud;
-import '../relatedCharaData/genreCounter.dart';
+import '../models/user_crud.dart' as UserCrud;
+import '../models/genreCounter.dart';
 import 'package:provider/provider.dart';
 import '../components/PartsConnectionWidget.dart';
 
 class BarcodeComponent extends StatefulWidget {
-  const BarcodeComponent({Key? key}) : super(key: key);
+  final String userid;
+  const BarcodeComponent({Key? key, required this.userid}) : super(key: key);
 
   @override
   _BarcodeComponentState createState() => _BarcodeComponentState();
@@ -24,8 +25,19 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
   String genre = '';
   String imageLink = '';
 
+  UserCrud.CharacterCrud charCrud = UserCrud.CharacterCrud();
+  UserCrud.BookCrud bookCrud = UserCrud.BookCrud();
+
   String result = ''; // スキャン結果を格納する変数
   Book? book; // Book インスタンスを保持する変数
+
+  late String userid;
+
+  @override
+  void initState() {
+    super.initState();
+    userid = widget.userid;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,18 +100,12 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
 
         genreCounter.increment();
 
-        CharaCrud.Firestore().genreUpdate(genre, genreCounter);
+        charCrud.genreUpdate(userid, genre, genreCounter);
 
         print(genreCounter.count);
 
-        await BookCrud.Firestore().create(
-          title,
-          author,
-          genre,
-          imageLink,
-          publishedDate,
-          description,
-        );
+        await bookCrud.createBook(userid, title, author, genre, imageLink,
+            publishedDate, description);
 
         Navigator.pop(context); // Close dialog
         //Navigator.pop(context); // Close BarcodePage
@@ -156,15 +162,15 @@ class _BarcodeComponentState extends State<BarcodeComponent> {
 
         genreCounter.increment();
 
-        CharaCrud.Firestore().genreUpdate(genre, genreCounter);
+        charCrud.genreUpdate(userid, genre, genreCounter);
 
         print(genreCounter.count);
 
         String imageLink =
             'https://th.bing.com/th/id/R.1544a44cd6dff1c0219bca46e0f0a4a2?rik=ZkfnNczbKsww3Q&riu=http%3a%2f%2f4.bp.blogspot.com%2f-bwbcXAaqtTM%2fUZ7s_dXPVdI%2fAAAAAAAAEfw%2f4D-2cKz-f1g%2fs1600%2f001%2525E8%2525B5%2525A4.jpg&ehk=4fGOsb94XR5T%2bcoavVME%2fpRyKAs3y3T80LEW2p%2bmw2A%3d&risl=&pid=ImgRaw&r=0';
         debugPrint(imageLink);
-        await BookCrud.Firestore().create(
-            title, author, genre, imageLink, 'YYYY-MM-DD', '取得できませんでした');
+        await bookCrud.createBook(userid, title, author, genre, imageLink,
+            'YYYY-MM-DD', '取得できませんでした');
       },
       btnOkText: '登録',
       btnCancelOnPress: () {},

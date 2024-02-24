@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:reading_promotion_app/components/AlumniComponent.dart';
 import 'package:reading_promotion_app/components/BarcodeComponent.dart';
@@ -224,3 +225,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+*/
