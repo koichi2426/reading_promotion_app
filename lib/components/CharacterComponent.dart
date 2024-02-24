@@ -6,6 +6,7 @@ class CharacterComponent extends StatelessWidget {
   final String genre1;
   final String genre2;
   final String genre3;
+  final String useruid;
 
   final String pathToParts = 'assets/images/parts/';
 
@@ -43,23 +44,24 @@ class CharacterComponent extends StatelessWidget {
     required this.genre1,
     required this.genre2,
     required this.genre3,
+    required this.useruid,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // CharacterDisplayWidgetを使用してキャラクターを表示
     return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ElementBarComponent(),
-              PartsConnectionWidget(
-                genres: [
-                  convertCategoryToEnglish(genre1),
-                  convertCategoryToEnglish(genre2),
-                  convertCategoryToEnglish(genre3),
-                ],
-              ),
-            ],
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        ElementBarComponent(userid: useruid),
+        PartsConnectionWidget(
+          genres: [
+            convertCategoryToEnglish(genre1),
+            convertCategoryToEnglish(genre2),
+            convertCategoryToEnglish(genre3),
+          ],
+        ),
+      ],
     );
   }
 }

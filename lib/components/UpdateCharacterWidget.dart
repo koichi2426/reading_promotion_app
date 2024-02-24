@@ -16,11 +16,13 @@ class UpdateCharacterWidget extends StatefulWidget {
 class _UpdateCharacterWidgetState extends State<UpdateCharacterWidget> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late String userDocId;
+  late String useruid;
 
   @override
   void initState() {
     super.initState();
     userDocId = widget.userid;
+    useruid = widget.userid;
     fetchUserDocId();
   }
 
@@ -72,7 +74,8 @@ class _UpdateCharacterWidgetState extends State<UpdateCharacterWidget> {
                 key: UniqueKey(),
                 genre1: data['genre']['first'],
                 genre2: data['genre']['second'],
-                genre3: data['genre']['third']);
+                genre3: data['genre']['third'],
+                useruid: useruid);
           } else {
             return FutureBuilder<String>(
               future: firebase_storage.FirebaseStorage.instance

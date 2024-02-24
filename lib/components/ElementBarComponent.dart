@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:reading_promotion_app/relatedBookData/books.dart';
-import 'package:reading_promotion_app/relatedBookData/crud.dart';
+import '../models/user_crud.dart' as UserCrud;
+import '../models/users.dart';
 
 class ElementBarComponent extends StatelessWidget {
-  const ElementBarComponent({super.key});
+  final String userid;
+  const ElementBarComponent({Key? key, required this.userid}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: GenreGauge(),
+      child: GenreGauge(uid: userid),
     );
   }
 }
 
 class GenreGauge extends StatefulWidget {
+  final String uid;
+  const GenreGauge({Key? key, required this.uid}) : super(key: key);
   @override
-  _GenreGaugeState createState() => _GenreGaugeState();
+  _GenreGaugeState createState() => _GenreGaugeState(user_uid: uid);
 }
 
 class _GenreGaugeState extends State<GenreGauge> {
   List<Books> booksdata = [];
-  Firestore firestore = Firestore();
+  UserCrud.BookCrud firestore = UserCrud.BookCrud();
+  late String user_uid;
 
-    @override
+  _GenreGaugeState({required this.user_uid});
+
+  @override
   void initState() {
     super.initState();
     // initStateメソッドでreadメソッドを呼び出し、データを取得する
@@ -31,7 +37,7 @@ class _GenreGaugeState extends State<GenreGauge> {
 
   Future<void> _fetchBooks() async {
     // readメソッドを呼び出してデータを取得し、booksリストを更新する
-    await firestore.read();
+    await firestore.getBooks(user_uid);
     setState(() {
       booksdata = firestore.books;
     });
@@ -40,8 +46,8 @@ class _GenreGaugeState extends State<GenreGauge> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: GenreBar(books: booksdata),
-      );
+      child: GenreBar(books: booksdata),
+    );
   }
 }
 
@@ -66,7 +72,6 @@ class GenreBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final Map<String, double> genreTotalValues = {};
     for (var data in books) {
       if (!genreTotalValues.containsKey(data.genre)) {
@@ -97,20 +102,24 @@ class GenreBar extends StatelessWidget {
                 width: width,
                 height: 30,
                 child: Text(
-                    entry.key,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 10.0,
-                    ),
+                  entry.key,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 10.0,
                   ),
+                ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(entry.key == genreTotalValues.keys.first ? 10.0 : 0),
-                    bottomLeft: Radius.circular(entry.key == genreTotalValues.keys.first ? 10.0 : 0),
-                    topRight: Radius.circular(entry.key == genreTotalValues.keys.last ? 10.0 : 0),
-                    bottomRight: Radius.circular(entry.key == genreTotalValues.keys.last ? 10.0 : 0),
+                    topLeft: Radius.circular(
+                        entry.key == genreTotalValues.keys.first ? 10.0 : 0),
+                    bottomLeft: Radius.circular(
+                        entry.key == genreTotalValues.keys.first ? 10.0 : 0),
+                    topRight: Radius.circular(
+                        entry.key == genreTotalValues.keys.last ? 10.0 : 0),
+                    bottomRight: Radius.circular(
+                        entry.key == genreTotalValues.keys.last ? 10.0 : 0),
                   ),
                   color: entry.value > 0 ? colorMap[entry.key] : Colors.grey,
                 ),
@@ -132,7 +141,7 @@ class GenreBar extends StatelessWidget {
     );
   }
 
-    Color _getColor(String genre) {
+  Color _getColor(String genre) {
     // 同じジャンル名に同じ色を割り当てる
     final int hashCode = genre.hashCode;
     final int index = hashCode % Colors.primaries.length;
