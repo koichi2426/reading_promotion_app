@@ -4,6 +4,7 @@ import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'home_page.dart';
+import 'usercreate_page.dart';
 import 'models/users.dart';
 import 'models/user_crud.dart' as UserCrud;
 
@@ -80,15 +81,22 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () async {
                   try {
                     // メール/パスワードでログイン
-                    final User? user = (await FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                                email: _email, password: _password))
-                        .user;
-                    if (user != null) {
-                      print("ログインしました ${user.email} , ${user.uid}, ${_name}");
-                      Navigator.of(context).pushNamed('/home');
+                    if (_password != null || _email != null) {
+                      final User? user = (await FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                                  email: _email, password: _password))
+                          .user;
+                      if (user != null) {
+                        print("ログインしました ${user.email} , ${user.uid}, ${_name}");
+                        Navigator.of(context).pushNamed('/home');
+                      } else {
+                        // ユーザ登録画面へ遷移
+                        print('ユーザ登録画面へ');
+                        Navigator.of(context).pushNamed('/create');
+                      }
                     }
                     // ユーザ登録画面へ遷移
+                    print('ユーザ登録画面へ: pass, email null');
                     Navigator.of(context).pushNamed('/create');
                   } catch (e) {
                     print(e);

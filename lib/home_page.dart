@@ -24,6 +24,7 @@ import 'package:reading_promotion_app/models/charBook.dart';
 // models import
 import 'package:reading_promotion_app/models/users.dart';
 import 'login_page.dart';
+import 'usercreate_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -31,6 +32,7 @@ class HomePage extends StatelessWidget {
     return MaterialApp(home: MyHomePage(), routes: <String, WidgetBuilder>{
       '/login': (BuildContext context) => LoginPage(),
       '/home': (BuildContext context) => HomePage(),
+      '/create': (BuildContext context) => CreatePage(),
     });
   }
 }
@@ -96,8 +98,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  charBookPage(userid: userid)),
-                                
+                              builder: (context) =>
+                                  charBookPage(userid: userid)),
                         );
                       },
                       child: Container(

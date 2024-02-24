@@ -4,6 +4,7 @@ import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'home_page.dart';
+import 'main.dart';
 import 'models/users.dart';
 import 'models/user_crud.dart' as UserCrud;
 
@@ -11,10 +12,10 @@ enum FormType { login, register }
 
 class CreatePage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _LoginPageState();
+  State<StatefulWidget> createState() => new _CreatePageState();
 }
 
-class _LoginPageState extends State<CreatePage> {
+class _CreatePageState extends State<CreatePage> {
   final db = FirebaseFirestore.instance;
 
   String _name = '';
