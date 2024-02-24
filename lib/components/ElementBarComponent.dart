@@ -62,7 +62,7 @@ class GenreBar extends StatelessWidget {
     "科学医学": Color.fromARGB(255, 153, 101, 53),
     "技術": Color.fromARGB(255, 238, 209, 63),
     "産業": Color.fromARGB(255, 174, 165, 161),
-    "芸術": Color.fromARGB(255, 0, 111, 95),
+    "芸術": Color.fromARGB(255, 89, 103, 30),
     "体育": Color.fromARGB(255, 0, 111, 95),
     "言語": Color.fromARGB(255, 117, 109, 145),
     "文学": Color.fromARGB(255, 233, 195, 183),
