@@ -36,15 +36,6 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // 1行目 メールアドレス入力用テキストフィールド
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'ユーザーネーム'),
-                onChanged: (String value) {
-                  setState(() {
-                    _name = value;
-                  });
-                },
-              ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'メールアドレス'),
                 onChanged: (String value) {
@@ -88,15 +79,17 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Text('ユーザ登録'),
                 onPressed: () async {
                   try {
+                    // メール/パスワードでログイン
                     final User? user = (await FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
+                            .signInWithEmailAndPassword(
                                 email: _email, password: _password))
                         .user;
                     if (user != null) {
-                      print("ユーザ登録しました ${user.email} , ${user.uid} ${_name}");
-                      _fetchUsers(user.uid, _name);
+                      print("ログインしました ${user.email} , ${user.uid}, ${_name}");
                       Navigator.of(context).pushNamed('/home');
                     }
+                    // ユーザ登録画面へ遷移
+                    Navigator.of(context).pushNamed('/create');
                   } catch (e) {
                     print(e);
                   }

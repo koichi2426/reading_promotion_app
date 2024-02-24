@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'login_page.dart';
 import 'root_page.dart';
 import 'home_page.dart';
+import 'usercreate_page.dart';
 import 'models/genreCounter.dart';
 
 void main() async {
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           '/login': (BuildContext context) => LoginPage(),
           '/home': (BuildContext context) => HomePage(),
+          '/create': (BuildContext context) => CreatePage(),
         });
   }
 }
